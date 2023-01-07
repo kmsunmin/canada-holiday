@@ -1,17 +1,17 @@
 import datetime
 
 FIXED_DATE_HOLIDAYS = {
-    "jan": "1",   # New Year's Day
-    "jul": "1",   # Canada Day
-    "dec": "25",  # Christmas Day
-    "dec": "26",  # Boxing Day
+    # Month : Day
+    1: (1,),       # New Year's Day
+    7: (1,),       # Canada Day
+    12: (25, 26)  # Christmas Day, Boxing Day
 }
 
 # ex: first Monday of the month
 STRIDING_HOLIDAYS = {
-    "feb": "3/Mon",  # Family Day, 3rd Monday
-    "sep": "1/Mon",  # Labour Day, 1st Monday
-    "oct": "2/Mon",  # Thanksgiving Day, 2nd Monday
+    2: (3, "Mon"),  # Family Day, 3rd Monday
+    9: (1, "Mon"),  # Labour Day, 1st Monday
+    10: (2, "Mon")  # Thanksgiving Day, 2nd Monday
 }
 
 # ex: last Monday preceding a certain date/holiday
@@ -21,9 +21,14 @@ PRECEDING_HOLIDAYS = {
 }
 
 
-def get_fixed_date_holidays(year: int, province: str):
+def get_fixed_date_holidays(year: int, month: int = None):
+    fixed_date_holidays = []
+    for month_key in FIXED_DATE_HOLIDAYS:
+        for day in FIXED_DATE_HOLIDAYS[month_key]:
+            holiday = datetime.date(year, month_key, day)
+            fixed_date_holidays.append(holiday)
 
-    pass
+    return sorted(fixed_date_holidays)
 
 
 def get_striding_holidays(year: int, province: str):
@@ -34,8 +39,8 @@ def get_preceding_holidays(year: int, province: str):
     pass
 
 
-def find_all_holidays_in_year(year: int, province: str):
-    province = province.lower()
+def get_province(prov: str):
+    province = prov.lower()
     if province in ["british columbia", "bc"]:
         province = "bc"
     elif province in ["manitoba", "mb"]:
@@ -55,10 +60,16 @@ def find_all_holidays_in_year(year: int, province: str):
     elif province in ["saskatchewan", "sk"]:
         province = "sk"
 
-    return get_fixed_date_holidays(year, province) + get_striding_holidays(year, province) + get_preceding_holidays(year, province)
+    return province
+
+
+def find_all_holidays_in_year(year: int, prov: str):
+    province = get_province(prov)
+    return get_fixed_date_holidays(year) + get_striding_holidays(year, province) + get_preceding_holidays(year, province)
 
 
 def find_holidays_in_a_month(year: int, month: int, province: str):
+    # get_fixed_date_holidays(year)
     pass
 
 
