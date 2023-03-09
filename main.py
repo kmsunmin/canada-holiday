@@ -183,7 +183,13 @@ def find_all_holidays_in_year(year: int, prov: str):
 
 
 def find_holidays_in_year_month(year: int, month: int, province: str):
-    pass
+    all_holidays_year = find_all_holidays_in_year(year, province)
+    holidays_in_month = []
+    for hol in all_holidays_year:
+        # hol[0] is datetime of the holiday
+        if hol[0].month == month:
+            holidays_in_month.append(hol)
+    return holidays_in_month
 
 
 def is_holiday(year: int, month: int, day: int, province: str) -> bool:
