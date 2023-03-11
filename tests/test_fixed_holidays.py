@@ -12,7 +12,7 @@ EXPECTED_FIXED_DATE_HOLIDAYS = {
 }
 
 
-def convert_holiday_to_datetime(holidays: dict, year) -> List[datetime.date]:
+def convert_fixed_holiday_to_datetime(holidays: dict, year) -> list:
     holidays_datetime = []
     for expected_fh_month in holidays:
         for expected_fh_day in holidays[expected_fh_month]:
@@ -30,7 +30,7 @@ class TestFixedDateHolidays:
         """
         year = 2023
 
-        expected_fixed_holidays_datetime = convert_holiday_to_datetime(EXPECTED_FIXED_DATE_HOLIDAYS, year)
+        expected_fixed_holidays_datetime = convert_fixed_holiday_to_datetime(EXPECTED_FIXED_DATE_HOLIDAYS, year)
         actual_fixed_date_holidays = get_fixed_date_holidays(year)
 
         assert actual_fixed_date_holidays == expected_fixed_holidays_datetime

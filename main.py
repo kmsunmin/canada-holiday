@@ -9,13 +9,13 @@ from constants import (
     PRECEDING_HOLIDAYS_ON,
     DAY_TO_INDEX,
 )
-from utils import read_holidays_tuple
+from utils import find_easter_day, read_holidays_tuple
 
 
 cal = Calendar()
 
 
-def get_fixed_date_holidays(year: int, month: int = None) -> List[(datetime.date, str)]:
+def get_fixed_date_holidays(year: int, month: int = None) -> list:
     fixed_date_holidays = []
 
     if not month:
@@ -31,7 +31,7 @@ def get_fixed_date_holidays(year: int, month: int = None) -> List[(datetime.date
     return sorted(fixed_date_holidays)
 
 
-def get_striding_holidays(year: int, province: str) -> List[(datetime.date, str)]:
+def get_striding_holidays(year: int, province: str) -> list:
     """
     Striding holidays are the ones nth day of a month
     ex: first Monday of the month
@@ -54,42 +54,7 @@ def get_striding_holidays(year: int, province: str) -> List[(datetime.date, str)
     return striding_holidays
 
 
-def find_easter_day(year: int) -> datetime.date:
-    """
-    # Use algorithm to find the date of Easter day
-    # Reference: https://www.geeksforgeeks.org/how-to-calculate-the-easter-date-for-a-given-year-using-gauss-algorithm/
-    """
-    A = year % 19
-    B = year % 4
-    C = year % 7
-    P = math.floor(year / 100)
-    Q = math.floor((13 + 8 * P) / 25)
-    M = 15 - Q + P - (P // 4) % 30
-    N = 4 + P - (P // 4) % 7
-    D = (19 * A + M) % 30
-    E = (N + 2 * B + 4 * C + 6 * D) % 7
-    days = 22 + D + E
-
-    # A corner case: when D is 29
-    if (D == 29) and (E == 6):
-        easter_day = datetime.date(year, 4, 19)
-        return easter_day
-    # Another corner case: when D is 28
-    elif (D == 28) and (E == 6):
-        easter_day = datetime.date(year, 4, 18)
-        return easter_day
-    else:
-        # If days > 31, move to April
-        if days > 31:
-            easter_day = datetime.date(year, 4, days - 31)
-            return easter_day
-        else:
-            # Otherwise, stay on March
-            easter_day = datetime.date(year, 3, days)
-            return easter_day
-
-
-def get_preceding_holidays(year: int, province: str) -> List[(datetime.date, str)]:
+def get_preceding_holidays(year: int, province: str) -> list:
     """
     Preceding holidays are the ones before a certain date or day
     ex: Victoria Day is Monday before May 25th
