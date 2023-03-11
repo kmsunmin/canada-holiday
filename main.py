@@ -3,46 +3,19 @@ import datetime
 import math
 from typing import List
 
-FIXED_DATE_HOLIDAYS = {
-    # Month : Day
-    1: [(1, "New Year's Day")],
-    7: [(1, "Canada Day")],
-    12: [(25, "Christmas Day"), (26, "Boxing Day")],
-}
+from constants import (
+    FIXED_DATE_HOLIDAYS,
+    STRIDING_HOLIDAYS_ON,
+    PRECEDING_HOLIDAYS_ON,
+    DAY_TO_INDEX,
+)
+from utils import read_holidays_tuple
 
-# ex: first Monday of the month
-STRIDING_HOLIDAYS_ON = {
-    2: [(3, "mon", "Family Day")],  # Family Day, 3rd Monday
-    9: [(1, "mon", "Labour Day")],  # Labour Day, 1st Monday
-    10: [(2, "mon", "Thanksgiving Day")],  # Thanksgiving Day, 2nd Monday
-}
-
-# ex: last Monday preceding a certain date/holiday
-PRECEDING_HOLIDAYS_ON = {
-    4: [
-        ("fri", "Easter Sunday", "Good Friday")
-    ],  # Good Friday (Friday before Easter Sunday)
-    5: [("mon", 25, "Victoria Day")],  # Victoria Day (Monday before May 25th)
-}
-
-DAY_TO_INDEX = {"mon": 0, "tue": 1, "wed": 2, "thr": 3, "fri": 4, "sat": 5, "sun": 6}
 
 cal = Calendar()
 
 
-def read_holidays_tuple(
-    holidays_result: list,
-    holidays_tuple: tuple,
-    year: int = None,
-    month: int = None,
-) -> None:
-    for day_tuple in holidays_tuple[month]:
-        day, name = day_tuple
-        holiday = datetime.date(year, month, day)
-        holidays_result.append((holiday, name))
-
-
-def get_fixed_date_holidays(year: int, month: int = None) -> list:
+def get_fixed_date_holidays(year: int, month: int = None) -> List[(datetime.date, str)]:
     fixed_date_holidays = []
 
     if not month:
@@ -58,7 +31,7 @@ def get_fixed_date_holidays(year: int, month: int = None) -> list:
     return sorted(fixed_date_holidays)
 
 
-def get_striding_holidays(year: int, province: str) -> List[datetime.date]:
+def get_striding_holidays(year: int, province: str) -> List[(datetime.date, str)]:
     """
     Striding holidays are the ones nth day of a month
     ex: first Monday of the month
@@ -81,7 +54,7 @@ def get_striding_holidays(year: int, province: str) -> List[datetime.date]:
     return striding_holidays
 
 
-def find_easter_day(year):
+def find_easter_day(year: int) -> datetime.date:
     """
     # Use algorithm to find the date of Easter day
     # Reference: https://www.geeksforgeeks.org/how-to-calculate-the-easter-date-for-a-given-year-using-gauss-algorithm/
@@ -116,7 +89,7 @@ def find_easter_day(year):
             return easter_day
 
 
-def get_preceding_holidays(year: int, province: str) -> List[datetime.date]:
+def get_preceding_holidays(year: int, province: str) -> List[(datetime.date, str)]:
     """
     Preceding holidays are the ones before a certain date or day
     ex: Victoria Day is Monday before May 25th
