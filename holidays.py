@@ -51,7 +51,7 @@ def get_nth_day_of_month_holidays(year: int, prov: str) -> list:
     return nth_day_holidays
 
 
-def get_holidays_before_a_certain_date(year: int, prov: str) -> list:
+def get_holidays_before_certain_dates(year: int, prov: str) -> list:
     """
     Holidays that precede a certain date or day
     ex: Victoria Day is Monday before May 25th
@@ -117,7 +117,7 @@ def get_all_holidays_in_year(year: int, prov: str):
     return sorted(
         get_fixed_date_holidays(year)
         + get_nth_day_of_month_holidays(year, province)
-        + get_holidays_before_a_certain_date(year, province)
+        + get_holidays_before_certain_dates(year, province)
     )
 
 
