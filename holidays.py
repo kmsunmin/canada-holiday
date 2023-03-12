@@ -19,9 +19,7 @@ def get_fixed_date_holidays(year: int, month: int = None) -> list:
     if not month:
         # If no month is given, return all fixed holidays in the given year
         for month_key in FIXED_HOLIDAYS:
-            read_holidays_tuple(
-                fixed_date_holidays, FIXED_HOLIDAYS, year, month_key
-            )
+            read_holidays_tuple(fixed_date_holidays, FIXED_HOLIDAYS, year, month_key)
     else:
         # return fixed holidays in the given month in the given year
         read_holidays_tuple(fixed_date_holidays, FIXED_HOLIDAYS, year, month)
@@ -106,7 +104,9 @@ def get_province(prov: str):
     elif province in ["saskatchewan", "sk"]:
         province = "Saskatchewan"
     else:
-        raise Exception(f"Cannot find the given province: {prov}. Please check your input.")
+        raise Exception(
+            f"Cannot find the given province: {prov}. Please check your input."
+        )
 
     return province
 
@@ -123,7 +123,6 @@ def get_all_holidays_in_year(year: int, prov: str):
 
 def get_holidays_in_year_month(year: int, month: int, prov: str):
     province = get_province(prov)
-    print(f"Getting holiday information of {province} province...")
     all_holidays_year = get_all_holidays_in_year(year, province)
     holidays_in_month = []
     for hol in all_holidays_year:

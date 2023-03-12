@@ -1,7 +1,5 @@
-import datetime
-
 from holidays import get_holidays_before_certain_dates
-from tests.test_utils import load_test_fixture_data
+from tests.test_utils import convert_fixture_data_to_holidays_list, load_test_fixture_data
 
 
 HOLIDAYS_BEFORE_CERTAIN_DATES_ON = {
@@ -16,13 +14,10 @@ class TestHolidaysBeforeACertainDate:
     def test_get_all_holidays_before_certain_dates(self):
         year = 2023
         province = "on"
-
-        expected_data_raw = load_test_fixture_data("fixtures/holidays_before_certain_dates.json")
-        expected_preceding_holidays = []
-        for expected_hol in expected_data_raw[province]:
-            year, month, day, holiday_name = expected_hol
-            hol_datetime = datetime.date(year, month, day)
-            expected_preceding_holidays.append((hol_datetime, holiday_name))
+        expected_data_raw: dict = load_test_fixture_data(
+            "fixtures/holidays_before_certain_dates.json"
+        )
+        expected_preceding_holidays = convert_fixture_data_to_holidays_list(expected_data_raw, province)
 
         actual_preceding_holidays = get_holidays_before_certain_dates(year, province)
 

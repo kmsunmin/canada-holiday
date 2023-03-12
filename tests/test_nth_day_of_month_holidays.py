@@ -1,7 +1,5 @@
-import datetime
-
 from holidays import get_nth_day_of_month_holidays
-from tests.test_utils import load_test_fixture_data
+from tests.test_utils import convert_fixture_data_to_holidays_list, load_test_fixture_data
 
 STRIDING_HOLIDAYS_ON = {
     2: [(3, "mon", "Family Day")],  # Family Day, 3rd Monday
@@ -15,13 +13,10 @@ class TestNthDayOfMonthHolidays:
     def test_get_all_nth_day_of_month_holidays_in_year_ontario(self):
         year = 2023
         province = "on"
-
-        expected_data_raw = load_test_fixture_data("fixtures/nth_day_of_month_holidays.json")
-        expected_striding_holidays = []
-        for expected_hol in expected_data_raw[province]:
-            year, month, day, holiday_name = expected_hol
-            hol_datetime = datetime.date(year, month, day)
-            expected_striding_holidays.append((hol_datetime, holiday_name))
+        expected_data_raw: dict = load_test_fixture_data(
+            "fixtures/nth_day_of_month_holidays.json"
+        )
+        expected_striding_holidays = convert_fixture_data_to_holidays_list(expected_data_raw, province)
 
         actual_striding_holidays = get_nth_day_of_month_holidays(year, province)
 

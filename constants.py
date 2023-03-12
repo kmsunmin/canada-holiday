@@ -2,7 +2,7 @@ FIXED_HOLIDAYS = {
     # Month : Day
     1: [(1, "New Year's Day")],
     7: [(1, "Canada Day")],
-    9: [(30, "Truth and Reconciliation")],
+    9: [(30, "Truth and Reconciliation Day")],
     12: [(25, "Christmas Day"), (26, "Boxing Day")],
 }
 
@@ -21,7 +21,7 @@ NTH_DAY_OF_MONTH_HOLIDAYS = {
     },
     "Prince Edward Island": {},
     "Quebec": {},
-    "Saskatchewan": {}
+    "Saskatchewan": {},
 }
 
 
@@ -40,7 +40,7 @@ HOLIDAYS_BEFORE_A_CERTAIN_DAY = {
     },
     "Prince Edward Island": {},
     "Quebec": {},
-    "Saskatchewan": {}
+    "Saskatchewan": {},
 }
 
 HOLIDAYS_AFTER_A_CERTAIN_DAY = {}
