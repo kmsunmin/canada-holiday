@@ -2,7 +2,7 @@ from calendar import Calendar
 import datetime
 
 from constants import (
-    FIXED_HOLIDAYS,
+    FIXED_HOLIDAYS_ALL,
     NTH_DAY_OF_MONTH_HOLIDAYS,
     HOLIDAYS_BEFORE_A_CERTAIN_DAY,
     DAY_TO_INDEX,
@@ -13,16 +13,18 @@ from utils import find_easter_day, read_holidays_tuple
 cal = Calendar()
 
 
-def get_fixed_date_holidays(year: int, month: int = None) -> list:
+def get_fixed_date_holidays(year: int, month: int = None, province: str = None) -> list:
     fixed_date_holidays = []
 
     if not month:
-        # If no month is given, return all fixed holidays in the given year
-        for month_key in FIXED_HOLIDAYS:
-            read_holidays_tuple(fixed_date_holidays, FIXED_HOLIDAYS, year, month_key)
+        if not province:
+            # If no month is given, return all fixed holidays in the given year
+            for month_key in FIXED_HOLIDAYS_ALL:
+                read_holidays_tuple(fixed_date_holidays, FIXED_HOLIDAYS_ALL, year, month_key)
     else:
-        # return fixed holidays in the given month in the given year
-        read_holidays_tuple(fixed_date_holidays, FIXED_HOLIDAYS, year, month)
+        if not province:
+            # return fixed holidays in the given month in the given year
+            read_holidays_tuple(fixed_date_holidays, FIXED_HOLIDAYS_ALL, year, month)
     return sorted(fixed_date_holidays)
 
 

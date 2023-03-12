@@ -1,10 +1,12 @@
 {
-  "results":
+  "results": {
+     "common_to_all_provinces":
      [
         [2023, 1, 1, "New Year's Day"],
         [2023, 7, 1, "Canada Day"],
-        [2023, 9, 30, "Truth and Reconciliation Day"],
+        [2023, 9, 30, "National Day for Truth and Reconciliation"],
         [2023, 12, 25, "Christmas Day"],
         [2023, 12, 26, "Boxing Day"]
      ]
+  }
 }
