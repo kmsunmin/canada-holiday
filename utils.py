@@ -2,18 +2,6 @@ import datetime
 import math
 
 
-def read_holidays_tuple(
-    holidays_result: list,
-    holidays_tuple: tuple,
-    year: int = None,
-    month: int = None,
-) -> None:
-    for day_tuple in holidays_tuple[month]:
-        day, name = day_tuple
-        holiday = datetime.date(year, month, day)
-        holidays_result.append((holiday, name))
-
-
 def find_easter_day(year: int) -> datetime.date:
     """
     # Use algorithm to find the date of Easter day
@@ -47,3 +35,11 @@ def find_easter_day(year: int) -> datetime.date:
             # Otherwise, stay on March
             easter_day = datetime.date(year, 3, days)
             return easter_day
+
+
+def convert_list_of_holidays_to_date(holidays: list, year: int):
+    holidays_date = []
+    for h in holidays:
+        h.date = h.to_date(year)
+        holidays_date.append(h.to_date(year))
+    return sorted(holidays_date)

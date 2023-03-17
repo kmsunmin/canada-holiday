@@ -18,7 +18,7 @@ class Holiday:
         nth_day: (int, str) = None,
         preceding_date: (str, int) = None,
         province: str = None,
-        succeeding_date: (str, int) = None
+        succeeding_date: (str, int) = None,
     ):
         self.name = name
         self.month = month
@@ -59,7 +59,10 @@ class Holiday:
             if self.nth_day and self.preceding_date:
                 raise Exception(f"Please check the Holiday: {self.name}.")
 
-            day_str, succeeding_day = self.succeeding_date  # ex: Monday after Easter Sunday
+            (
+                day_str,
+                succeeding_day,
+            ) = self.succeeding_date  # ex: Monday after Easter Sunday
             day_str_idx = DAY_TO_INDEX[day_str]
 
             if succeeding_day == "Easter Sunday":
@@ -67,6 +70,6 @@ class Holiday:
             else:
                 succeed_date = datetime.date(year, self.month, succeeding_day)
             succeed_day_idx = succeed_date.weekday()
-            delta_days = abs(succeed_day_idx - day_str_idx)
-            # Find 'day_str' before easter_day
+            delta_days = 7 - abs(succeed_day_idx - day_str_idx)
+            # Find 'day_str' after succeed_date
             return succeed_date + datetime.timedelta(days=delta_days)

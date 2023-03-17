@@ -17,53 +17,98 @@ from constants import (
     YUKON,
     NATIONAL_HOLIDAYS
 )
+from utils import convert_list_of_holidays_to_date
+
+
 cal = Calendar()
 
 
 def get_province_holidays(prov: str):
     province = prov.lower()
-    provincial_holidays = ()
-    if province in ["british columbia", "bc"]:
-        province = "British Columbia"
+
+    if province in ["alberta", "ab"]:
+        name = "Alberta"
+        provincial_holidays = ALBERTA
+    elif province in ["british columbia", "bc"]:
+        name = "British Columbia"
+        provincial_holidays = BRITISH_COLUMBIA
     elif province in ["manitoba", "mb"]:
-        province = "Manitoba"
+        name = "Manitoba"
+        provincial_holidays = MANITOBA
     elif province in ["new brunswick", "nb"]:
-        province = "New Brunswick"
+        name = "New Brunswick"
+        provincial_holidays = NEW_BRUNSWICK
     elif province in ["newfoundland", "newfoundland and labrador", "nl"]:
-        province = "Newfoundland and Labrador"
+        name = "Newfoundland and Labrador"
+        provincial_holidays = NEWFOUNDLAND_AND_LABRADOR
+    elif province in ["northwest territories", "nt"]:
+        name = "Northwest Territories"
+        provincial_holidays = NORTHWEST_TERRITORIES
     elif province in ["nova scotia", "ns"]:
-        province = "Nova Scotia"
+        name = "Nova Scotia"
+        provincial_holidays = NOVA_SCOTIA
+    elif province in ["nunavut", "nu"]:
+        name = "Nunavut"
+        provincial_holidays = NUNAVUT
     elif province in ["ontario", "on"]:
-        province = "Ontario"
-    elif province in ["prince edward island", "pei"]:
-        province = "Prince Edward Island"
+        name = "Ontario"
+        provincial_holidays = ONTARIO
+    elif province in ["prince edward island", "pe"]:
+        name = "Prince Edward Island"
+        provincial_holidays = PRINCE_EDWARD_ISLAND
     elif province in ["quebec", "qc"]:
-        province = "Quebec"
+        name = "Quebec"
+        provincial_holidays = QUEBEC
     elif province in ["saskatchewan", "sk"]:
-        province = "Saskatchewan"
+        name = "Saskatchewan"
+        provincial_holidays = SASKATCHEWAN
+    elif province in ["yukon", "yt"]:
+        name = "Yukon"
+        provincial_holidays = YUKON
     else:
         raise Exception(
             f"Cannot find the given province: {prov}. Please check your input."
         )
-
-    return province
-
-
-def get_all_holidays_in_year(year: int, prov: str):
-    province_holidays = get_province_holidays(prov)
-    print(f"Getting holiday information of {province} province...")
-    return
+    return name, provincial_holidays
 
 
-def get_holidays_in_year_month(year: int, month: int, prov: str):
-    province_holidays = get_province_holidays(prov)
-    all_holidays_year = get_all_holidays_in_year(year, province)
-    holidays_in_month = []
-    for hol in all_holidays_year:
-        # hol[0] is datetime of the holiday
-        if hol[0].month == month:
-            holidays_in_month.append(hol)
-    return holidays_in_month
+def get_all_holidays(province: str, year: int):
+    """
+    Get all holidays of the given province in the given year.
+    """
+    all_holidays = []
+    province_name, province_holidays = get_province_holidays(province)
+    all_holidays.extend(province_holidays)
+    print(f"Getting holiday information of {province_name} province...")
+
+    # Combine with Canadian national holidays
+    all_holidays.extend(NATIONAL_HOLIDAYS)
+
+    # Convert holidays to date
+    all_holidays_date = convert_list_of_holidays_to_date(all_holidays, year)
+    return all_holidays_date
+
+
+def get_all_holidays(province: str, year: int, month: int):
+    """
+    Get all holidays of the given province in the given year and month.
+    """
+    all_holidays = []
+    province_name, province_holidays = get_province_holidays(province)
+    all_holidays.extend(province_holidays)
+    print(f"Getting holiday information of {province_name} province...")
+
+    # Combine with Canadian national holidays
+    all_holidays.extend(NATIONAL_HOLIDAYS)
+
+    # Trim all_holidays to the ones in the given month
+    for h in all_holidays:
+        if h.month != month:
+            all_holidays.remove(h)
+
+    # Convert holidays to date
+    all_holidays_date = convert_list_of_holidays_to_date(all_holidays, year)
+    return all_holidays_date
 
 
 def is_holiday(year: int, month: int, day: int, prov: str) -> bool:

@@ -1,4 +1,4 @@
-from holidays import Holiday
+from holiday import Holiday
 
 
 FIXED_HOLIDAYS_ALL = {
@@ -27,7 +27,7 @@ FIXED_HOLIDAYS_PROVINCIAL = {
     "Yukon": {},
 }
 
-NATIONAL_HOLIDAYS = (
+NATIONAL_HOLIDAYS = [
     Holiday("New Year's Day", 1, 1),
     Holiday("Victoria Day", 5, preceding_date=("mon", 25)),  # Monday before May 25th
     Holiday("Canada Day", 7, 1),
@@ -35,27 +35,27 @@ NATIONAL_HOLIDAYS = (
     Holiday("Thanksgiving Day", 10, nth_day=(2, "mon")),  # 2nd Monday in October
     Holiday("Christmas Day", 12, 25),
     Holiday("Boxing Day", 12, 26),
-)
+]
 
-ALBERTA = ()
-BRITISH_COLUMBIA = ()
-MANITOBA = ()
-NEW_BRUNSWICK = ()
-NEWFOUNDLAND_AND_LABRADOR = ()
-NORTHWEST_TERRITORIES = ()
-NOVA_SCOTIA = ()
-NUNAVUT = ()
-ONTARIO = (
+ALBERTA = []
+BRITISH_COLUMBIA = []
+MANITOBA = []
+NEW_BRUNSWICK = []
+NEWFOUNDLAND_AND_LABRADOR = []
+NORTHWEST_TERRITORIES = []
+NOVA_SCOTIA = []
+NUNAVUT = []
+ONTARIO = [
     Holiday("Family Day", 2, nth_day=(3, "mon")),  # 3rd Monday in February
     Holiday("Good Friday", 4, preceding_date=("fri", "Easter Sunday")),  # Friday before Easter Sunday
     Holiday("Easter Monday", 4, succeeding_date=("mon", "Easter Sunday")),  # Monday after Easter Sunday
     Holiday("Civic Holiday", 8, nth_day=(1, "mon")),  # 1st Monday in August
     Holiday("National Day for Truth and Reconciliation", 9, 30),
-)
-PRINCE_EDWARD_ISLAND = ()
-QUEBEC = ()
-SASKATCHEWAN = ()
-YUKON = ()
+]
+PRINCE_EDWARD_ISLAND = []
+QUEBEC = []
+SASKATCHEWAN = []
+YUKON = []
 
 # ex: first Monday of the month
 NTH_DAY_OF_MONTH_HOLIDAYS = {
