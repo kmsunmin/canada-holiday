@@ -22,4 +22,4 @@ jobs:
           poetry lock
           poetry install
       - name: Test with pytest
-        run: pytest tests/test_holidays.py
+        run: poetry run pytest tests/test_holidays.py
