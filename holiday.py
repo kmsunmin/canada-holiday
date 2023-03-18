@@ -12,8 +12,9 @@ class Holiday:
         self,
         name: str,
         month: int,
-        day: int = None,
         *,
+        year: int = None,
+        day: int = None,
         date: datetime.date = None,
         nth_day: (int, str) = None,
         preceding_date: (str, int) = None,
@@ -22,6 +23,7 @@ class Holiday:
     ):
         self.name = name
         self.month = month
+        self.year = year
         self.day = day  # ex: Monday, Tuesday
         self.date = date  # ex: datetime.date(2023, 12, 25)
         self.nth_day = nth_day

@@ -2,6 +2,42 @@ import datetime
 import math
 
 
+def check_province_name(prov: str):
+    province = prov.lower()
+
+    if province in ["alberta", "ab"]:
+        provincial_name = "Alberta"
+    elif province in ["british columbia", "bc"]:
+        provincial_name = "British Columbia"
+    elif province in ["manitoba", "mb"]:
+        provincial_name = "Manitoba"
+    elif province in ["new brunswick", "nb"]:
+        provincial_name = "New Brunswick"
+    elif province in ["newfoundland", "newfoundland and labrador", "nl"]:
+        provincial_name = "Newfoundland and Labrador"
+    elif province in ["northwest territories", "nt"]:
+        provincial_name = "Northwest Territories"
+    elif province in ["nova scotia", "ns"]:
+        provincial_name = "Nova Scotia"
+    elif province in ["nunavut", "nu"]:
+        provincial_name = "Nunavut"
+    elif province in ["ontario", "on"]:
+        provincial_name = "Ontario"
+    elif province in ["prince edward island", "pe"]:
+        provincial_name = "Prince Edward Island"
+    elif province in ["quebec", "qc"]:
+        provincial_name = "Quebec"
+    elif province in ["saskatchewan", "sk"]:
+        provincial_name = "Saskatchewan"
+    elif province in ["yukon", "yt"]:
+        provincial_name = "Yukon"
+    else:
+        raise Exception(
+            f"Cannot find the given province: {prov}. Please check your input."
+        )
+    return provincial_name
+
+
 def find_easter_day(year: int) -> datetime.date:
     """
     # Use algorithm to find the date of Easter day
@@ -37,9 +73,21 @@ def find_easter_day(year: int) -> datetime.date:
             return easter_day
 
 
-def convert_list_of_holidays_to_date(holidays: list, year: int):
-    holidays_date = []
-    for h in holidays:
+def update_list_of_holidays_to_date(holidays: list, year: int) -> list:
+    updated_holidays_list = holidays.copy()
+    for h in updated_holidays_list:
         h.date = h.to_date(year)
-        holidays_date.append(h.to_date(year))
-    return sorted(holidays_date)
+        h.year = year
+        h.day = h.date.day
+    return updated_holidays_list
+
+
+def sort_list_of_holidays_by_date(holidays: list) -> list:
+    """
+    Sort the given list of Holidays bt their date.
+    """
+    return sorted(holidays, key=lambda h: h.date)
+
+
+def filter_list_of_holidays_by_month(holidays: list, month: int) -> list:
+    return [h for h in holidays if h.month == month]
