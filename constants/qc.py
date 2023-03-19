@@ -18,6 +18,6 @@ QUEBEC = [
         province="Quebec"
     ),
     Holiday(
-        "Thanksgiving Day", month=10, nth_day=(2, "mon"), province="Quebec"
+        "Thanksgiving Day", month=10, nth_day=("mon", 2), province="Quebec"
     ),  # 2nd Monday in October
 ]

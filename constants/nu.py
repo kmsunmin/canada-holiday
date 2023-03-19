@@ -18,6 +18,6 @@ NUNAVUT = [
         province="Nunavut"
     ),
     Holiday(
-        "Thanksgiving Day", month=10, nth_day=(2, "mon"), province="Nunavut"
+        "Thanksgiving Day", month=10, nth_day=("mon", 2), province="Nunavut"
     ),  # 2nd Monday in October
 ]

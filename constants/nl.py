@@ -12,7 +12,13 @@ NEWFOUNDLAND_AND_LABRADOR = [
     Holiday(
         "St. George's Day",
         month=4,
-        day=23,
+        nearest_day=("mon", 23),
+        province="Newfoundland and Labrador"
+    ),
+    Holiday(
+        "Discovery Day",
+        month=6,
+        nearest_day=("mon", 24),
         province="Newfoundland and Labrador"
     )
 ]

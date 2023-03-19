@@ -3,7 +3,7 @@ from holiday import Holiday
 
 YUKON = [
     Holiday(
-        "Heritage Day", month=2, nth_day=(3, "mon"), province="Yukon"
+        "Heritage Day", month=2, nth_day=("fri", 3), province="Yukon"
     ),  # 3rd Monday in February
     Holiday(
         "Good Friday",
@@ -17,10 +17,10 @@ YUKON = [
     Holiday(
         "Discovery Day",
         month=8,
-        nth_day=(3, "mon"),
+        nth_day=("mon", 3),
         province="Yukon"
     ),
     Holiday(
-        "Thanksgiving Day", month=10, nth_day=(2, "mon"), province="Yukon"
+        "Thanksgiving Day", month=10, nth_day=("mon", 2), province="Yukon"
     ),  # 2nd Monday in October
 ]

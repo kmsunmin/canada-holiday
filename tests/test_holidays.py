@@ -8,7 +8,7 @@ from utils import (
     sort_list_of_holidays_by_date,
     filter_list_of_holidays_by_month,
 )
-from tests.fixtures.ontario_holidays import (
+from tests.fixtures.on import (
     CANADA_EASTER_DAY_2023,
     ONTARIO_2023,
     ONTARIO_2023_APRIL,

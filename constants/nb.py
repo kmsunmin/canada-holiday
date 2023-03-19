@@ -3,7 +3,7 @@ from holiday import Holiday
 
 NEW_BRUNSWICK = [
     Holiday(
-        "Family Day", month=2, nth_day=(3, "mon"), province="New Brunswick"
+        "Family Day", month=2, nth_day=("mon", 3), province="New Brunswick"
     ),  # 3rd Monday in February
     Holiday(
         "Good Friday",
@@ -12,6 +12,6 @@ NEW_BRUNSWICK = [
         province="New Brunswick",
     ),  # Friday before Easter Sunday
     Holiday(
-        "Thanksgiving Day", month=10, nth_day=(2, "mon"), province="New Brunswick"
+        "Thanksgiving Day", month=10, nth_day=("mon", 2), province="New Brunswick"
     ),  # 2nd Monday in October
 ]

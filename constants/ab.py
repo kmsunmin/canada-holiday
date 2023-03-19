@@ -3,7 +3,7 @@ from holiday import Holiday
 
 ALBERTA = [
     Holiday(
-        "Family Day", month=2, nth_day=(3, "mon"), province="Alberta"
+        "Family Day", month=2, nth_day=("mon", 3), province="Alberta"
     ),  # 3rd Monday in February
     Holiday(
         "Good Friday",
@@ -14,8 +14,8 @@ ALBERTA = [
     Holiday(
         "Victoria Day", month=5, preceding_date=("mon", 25), province="Alberta"
     ),  # Monday before May 25th
-    Holiday("Heritage Day", month=8, nth_day=(1, "mon"), province="Alberta"),
+    Holiday("Heritage Day", month=8, nth_day=("mon", 1), province="Alberta"),
     Holiday(
-        "Thanksgiving Day", month=10, nth_day=(2, "mon"), province="Alberta"
+        "Thanksgiving Day", month=10, nth_day=("mon", 2), province="Alberta"
     ),  # 2nd Monday in October
 ]

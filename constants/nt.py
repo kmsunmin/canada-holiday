@@ -18,6 +18,6 @@ NORTHWEST_TERRITORIES = [
         "Victoria Day", month=5, preceding_date=("mon", 25), province="Northwest Territories"
     ),  # Monday before May 25th
     Holiday(
-        "Thanksgiving Day", month=10, nth_day=(2, "mon"), province="Northwest Territories"
+        "Thanksgiving Day", month=10, nth_day=("mon", 2), province="Northwest Territories"
     ),  # 2nd Monday in October
 ]
