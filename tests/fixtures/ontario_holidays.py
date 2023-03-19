@@ -33,22 +33,13 @@ ONTARIO_2023 = [
         province="Ontario",
     ),  # Friday before Easter Sunday
     Holiday(
-        "Easter Monday",
-        month=4,
-        year=2023,
-        day=10,
-        date=datetime.date(2023, 4, 10),
-        succeeding_date=("mon", "Easter Sunday"),
-        province="Ontario",
-    ),  # Monday after Easter Sunday
-    Holiday(
         "Victoria Day",
         month=5,
         year=2023,
         day=22,
         date=datetime.date(2023, 5, 22),
         preceding_date=("mon", 25),
-        province="all",
+        province="Ontario",
     ),  # Monday before May 25th
     Holiday(
         "Canada Day",
@@ -82,7 +73,7 @@ ONTARIO_2023 = [
         year=2023,
         day=30,
         date=datetime.date(2023, 9, 30),
-        province="Ontario",
+        province="all",
     ),
     Holiday(
         "Thanksgiving Day",
@@ -91,7 +82,7 @@ ONTARIO_2023 = [
         day=9,
         date=datetime.date(2023, 10, 9),
         nth_day=(2, "mon"),
-        province="all",
+        province="Ontario",
     ),  # 2nd Monday in October
     Holiday(
         "Christmas Day",
@@ -107,7 +98,7 @@ ONTARIO_2023 = [
         year=2023,
         day=26,
         date=datetime.date(2023, 12, 26),
-        province="all",
+        province="Ontario",
     ),
 ]
 
@@ -122,22 +113,13 @@ UNSORTED_ONTARIO_2023 = [
         province="Ontario",
     ),  # Friday before Easter Sunday
     Holiday(
-        "Easter Monday",
-        month=4,
-        year=2023,
-        day=10,
-        date=datetime.date(2023, 4, 10),
-        succeeding_date=("mon", "Easter Sunday"),
-        province="Ontario",
-    ),  # Monday after Easter Sunday
-    Holiday(
         "Victoria Day",
         month=5,
         year=2023,
         day=22,
         date=datetime.date(2023, 5, 22),
         preceding_date=("mon", 25),
-        province="all",
+        province="Ontario",
     ),  # Monday before May 25th
     Holiday(
         "Thanksgiving Day",
@@ -146,7 +128,7 @@ UNSORTED_ONTARIO_2023 = [
         day=9,
         date=datetime.date(2023, 10, 9),
         nth_day=(2, "mon"),
-        province="all",
+        province="Ontario",
     ),  # 2nd Monday in October
     Holiday(
         "Christmas Day",
@@ -179,7 +161,7 @@ UNSORTED_ONTARIO_2023 = [
         year=2023,
         day=26,
         date=datetime.date(2023, 12, 26),
-        province="all",
+        province="Ontario",
     ),
     Holiday(
         "Canada Day",
@@ -213,7 +195,7 @@ UNSORTED_ONTARIO_2023 = [
         year=2023,
         day=30,
         date=datetime.date(2023, 9, 30),
-        province="Ontario",
+        province="all",
     ),
 ]
 
@@ -227,15 +209,6 @@ ONTARIO_2023_APRIL = [
         preceding_date=("fri", "Easter Sunday"),
         province="Ontario",
     ),  # Friday before Easter Sunday
-    Holiday(
-        "Easter Monday",
-        month=4,
-        year=2023,
-        day=10,
-        date=datetime.date(2023, 4, 10),
-        succeeding_date=("mon", "Easter Sunday"),
-        province="Ontario",
-    ),  # Monday after Easter Sunday
 ]
 
 ONTARIO_ONLY_HOLIDAYS_2023 = [
@@ -258,21 +231,13 @@ ONTARIO_ONLY_HOLIDAYS_2023 = [
         province="Ontario",
     ),  # Friday before Easter Sunday
     Holiday(
-        "Easter Monday",
-        month=4,
-        year=2023,
-        day=10,
-        date=datetime.date(2023, 4, 10),
-        succeeding_date=("mon", "Easter Sunday"),
-        province="Ontario",
-    ),  # Monday after Easter Sunday
+        "Victoria Day", month=5, year=2023, day=22, date=datetime.date(2023, 5, 22), preceding_date=("mon", 25), province="Ontario"
+    ),  # Monday before May 25th
     Holiday(
-        "Civic Holiday",
-        month=8,
-        year=2023,
-        day=7,
-        date=datetime.date(2023, 8, 7),
-        nth_day=(1, "mon"),
-        province="Ontario",
+        "Civic Holiday", month=8, year=2023, day=7, date=datetime.date(2023, 8, 7), nth_day=(1, "mon"), province="Ontario"
     ),  # 1st Monday in August
+    Holiday(
+        "Thanksgiving Day", month=10, year=2023, day=9, date=datetime.date(2023, 10, 9), nth_day=(2, "mon"), province="Ontario"
+    ),  # 2nd Monday in October
+    Holiday("Boxing Day", month=12, year=2023, day=26, date=datetime.date(2023, 12, 26), province="Ontario"),
 ]

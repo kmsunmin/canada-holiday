@@ -13,6 +13,7 @@ from tests.fixtures.ontario_holidays import (
     ONTARIO_2023,
     ONTARIO_2023_APRIL,
     UNSORTED_ONTARIO_2023,
+    ONTARIO_ONLY_HOLIDAYS_2023
 )
 from tests.utils.test_utils import compare_holidays_list
 
@@ -25,7 +26,7 @@ class TestCanadaHolidays:
 
     def test_update_list_of_holidays_to_date_given_year(self):
         year = 2023
-        expected_holidays_list_with_date = ONTARIO_2023
+        expected_holidays_list_with_date = ONTARIO_ONLY_HOLIDAYS_2023
 
         ontario_holidays_without_date = ONTARIO
         actual_holidays_with_date = update_list_of_holidays_to_date(
