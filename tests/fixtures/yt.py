@@ -3,7 +3,15 @@ import datetime
 from holiday import Holiday
 
 
-YUKON = [
+YUKON_2023 = [
+    Holiday(
+        "New Year's Day",
+        month=1,
+        year=2023,
+        day=1,
+        date=datetime.date(2023, 1, 1),
+        province="all",
+    ),
     Holiday(
         "Heritage Day",
         month=2,
@@ -32,6 +40,14 @@ YUKON = [
         province="Yukon",
     ),  # Monday before May 25th
     Holiday(
+        "Canada Day",
+        month=7,
+        year=2023,
+        day=1,
+        date=datetime.date(2023, 7, 1),
+        province="all",
+    ),
+    Holiday(
         "Discovery Day",
         month=8,
         year=2023,
@@ -39,6 +55,23 @@ YUKON = [
         date=datetime.date(2023, 8, 21),
         nth_day=("mon", 3),
         province="Yukon",
+    ),
+    Holiday(
+        "Labour Day",
+        month=9,
+        year=2023,
+        day=4,
+        date=datetime.date(2023, 9, 4),
+        nth_day=("mon", 1),
+        province="all",
+    ),  # 1st Monday in September
+    Holiday(
+        "National Day for Truth and Reconciliation",
+        month=9,
+        year=2023,
+        day=30,
+        date=datetime.date(2023, 9, 30),
+        province="all",
     ),
     Holiday(
         "Thanksgiving Day",
@@ -49,4 +82,12 @@ YUKON = [
         nth_day=("mon", 2),
         province="Yukon",
     ),  # 2nd Monday in October
+    Holiday(
+        "Christmas Day",
+        month=12,
+        year=2023,
+        day=25,
+        date=datetime.date(2023, 12, 25),
+        province="all",
+    ),
 ]

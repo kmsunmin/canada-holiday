@@ -14,12 +14,7 @@ YUKON = [
     Holiday(
         "Victoria Day", month=5, preceding_date=("mon", 25), province="Yukon"
     ),  # Monday before May 25th
-    Holiday(
-        "Discovery Day",
-        month=8,
-        nth_day=("mon", 3),
-        province="Yukon"
-    ),
+    Holiday("Discovery Day", month=8, nth_day=("mon", 3), province="Yukon"),
     Holiday(
         "Thanksgiving Day", month=10, nth_day=("mon", 2), province="Yukon"
     ),  # 2nd Monday in October

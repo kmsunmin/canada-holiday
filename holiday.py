@@ -34,7 +34,12 @@ class Holiday:
         self.succeeding_date = succeeding_date
 
     def to_date(self, year: int):
-        if not self.nth_day and not self.preceding_date and not self.succeeding_date and not self.nearest_day:
+        if (
+            not self.nth_day
+            and not self.preceding_date
+            and not self.succeeding_date
+            and not self.nearest_day
+        ):
             return datetime.date(year, self.month, self.day)
 
         if self.nth_day:
@@ -83,17 +88,20 @@ class Holiday:
 
             day_str, nearest_day = self.nearest_day
             day_str_idx = DAY_TO_INDEX[day_str]
-            # if 23 is Sunday (6)  Monday (0) day + (7 - delta: 6)
-            # if 23 is Tuesday(1)  Monday (0) day - delta:1
-            # if 23 is Wednesday(2) Monday (0) day - delta: 2
-            # if 23 is Thursday(3) Monday (0) day - delta: 3
-            # if 23 is Friday (4)  Monday (0) day + (7 - delta: 4)
-            # if 23 is Saturday (5) Monday (0) day + (7 - delta:5)
-            nearest_date = datetime.date(self.year, self.month, self.nearest_day)
+            """
+            Example of calculating nearest Monday:
+            if 23 is Sunday (6)    Monday (0) day + (7 - delta:6)
+            if 23 is Tuesday (1)   Monday (0) day - delta:1
+            if 23 is Wednesday (2) Monday (0) day - delta:2
+            if 23 is Thursday (3)  Monday (0) day - delta:3
+            if 23 is Friday (4)    Monday (0) day + (7 - delta:4)
+            if 23 is Saturday (5)  Monday (0) day + (7 - delta:5)
+            """
+            nearest_date = datetime.date(self.year, self.month, self.nearest_day[1])
             nearest_day_str_idx = nearest_date.weekday()
             delta_days = abs(day_str_idx - nearest_day_str_idx)
 
             if delta_days < 4:
-                return nearest_date - delta_days
+                return nearest_date - datetime.timedelta(delta_days)
             else:
-                return nearest_date + (7 - delta_days)
+                return nearest_date + datetime.timedelta(7 - delta_days)

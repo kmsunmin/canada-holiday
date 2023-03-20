@@ -11,12 +11,7 @@ NUNAVUT = [
     Holiday(
         "Victoria Day", month=5, preceding_date=("mon", 25), province="Nunavut"
     ),  # Monday before May 25th
-    Holiday(
-        "Nunavut Day",
-        month=7,
-        day=9,
-        province="Nunavut"
-    ),
+    Holiday("Nunavut Day", month=7, day=9, province="Nunavut"),
     Holiday(
         "Thanksgiving Day", month=10, nth_day=("mon", 2), province="Nunavut"
     ),  # 2nd Monday in October

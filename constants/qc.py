@@ -12,10 +12,7 @@ QUEBEC = [
         "National Patriots Day", month=5, preceding_date=("mon", 25), province="Quebec"
     ),  # Monday before May 25th
     Holiday(
-        "Féte Nationale (St. Jean Baptiste Day)",
-        month=6,
-        day=24,
-        province="Quebec"
+        "Féte Nationale (St. Jean Baptiste Day)", month=6, day=24, province="Quebec"
     ),
     Holiday(
         "Thanksgiving Day", month=10, nth_day=("mon", 2), province="Quebec"

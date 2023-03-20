@@ -76,8 +76,8 @@ def find_easter_day(year: int) -> datetime.date:
 def update_list_of_holidays_to_date(holidays: list, year: int) -> list:
     updated_holidays_list = holidays.copy()
     for h in updated_holidays_list:
-        h.date = h.to_date(year)
         h.year = year
+        h.date = h.to_date(year)
         h.day = h.date.day
     return updated_holidays_list
 
