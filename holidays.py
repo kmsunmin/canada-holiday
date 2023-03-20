@@ -14,7 +14,7 @@ from constants import (
     QUEBEC,
     SASKATCHEWAN,
     YUKON,
-    NATIONAL_HOLIDAYS,
+    NATIONAL,
 )
 from utils import (
     check_province_name,
@@ -77,7 +77,7 @@ def get_all_holidays(province: str, year: int, month: int = None) -> list:
     print(f"Getting holiday information of {province_name} province...")
 
     # Combine with Canadian national holidays
-    all_holidays.extend(NATIONAL_HOLIDAYS)
+    all_holidays.extend(NATIONAL)
 
     # If month presents, filter all_holidays for the given month
     if month and isinstance(month, int):
