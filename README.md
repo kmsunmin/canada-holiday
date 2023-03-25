@@ -15,7 +15,7 @@ $ poetry add canada-holiday
 ```
 
 # Usage
-```bash
+```python
 import datetime
 import canada_holidays
 
