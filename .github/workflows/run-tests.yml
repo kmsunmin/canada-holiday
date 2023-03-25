@@ -22,4 +22,4 @@ jobs:
           poetry lock
           poetry install
       - name: Test with pytest
-        run: poetry run pytest tests/
+        run: poetry run pytest --cov=tests/ --cov-append
