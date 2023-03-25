@@ -1,12 +1,10 @@
 import datetime
 
-from holiday import Holiday
+from holiday_class import CanadaHoliday
 
-
-CANADA_EASTER_DAY_2023 = datetime.date(2023, 4, 9)
 
 ONTARIO_2023 = [
-    Holiday(
+    CanadaHoliday(
         "New Year's Day",
         month=1,
         year=2023,
@@ -14,7 +12,7 @@ ONTARIO_2023 = [
         date=datetime.date(2023, 1, 1),
         province="all",
     ),
-    Holiday(
+    CanadaHoliday(
         "Family Day",
         month=2,
         year=2023,
@@ -23,7 +21,7 @@ ONTARIO_2023 = [
         nth_day=("mon", 3),
         province="Ontario",
     ),  # 3rd Monday in February
-    Holiday(
+    CanadaHoliday(
         "Good Friday",
         month=4,
         year=2023,
@@ -32,7 +30,7 @@ ONTARIO_2023 = [
         preceding_date=("fri", "Easter Sunday"),
         province="Ontario",
     ),  # Friday before Easter Sunday
-    Holiday(
+    CanadaHoliday(
         "Victoria Day",
         month=5,
         year=2023,
@@ -41,7 +39,7 @@ ONTARIO_2023 = [
         preceding_date=("mon", 25),
         province="Ontario",
     ),  # Monday before May 25th
-    Holiday(
+    CanadaHoliday(
         "Canada Day",
         month=7,
         year=2023,
@@ -49,7 +47,7 @@ ONTARIO_2023 = [
         date=datetime.date(2023, 7, 1),
         province="all",
     ),
-    Holiday(
+    CanadaHoliday(
         "Civic Holiday",
         month=8,
         year=2023,
@@ -58,7 +56,7 @@ ONTARIO_2023 = [
         nth_day=("mon", 1),
         province="Ontario",
     ),  # 1st Monday in August
-    Holiday(
+    CanadaHoliday(
         "Labour Day",
         month=9,
         year=2023,
@@ -67,7 +65,7 @@ ONTARIO_2023 = [
         nth_day=("mon", 1),
         province="all",
     ),  # 1st Monday in September
-    Holiday(
+    CanadaHoliday(
         "National Day for Truth and Reconciliation",
         month=9,
         year=2023,
@@ -75,7 +73,7 @@ ONTARIO_2023 = [
         date=datetime.date(2023, 9, 30),
         province="all",
     ),
-    Holiday(
+    CanadaHoliday(
         "Thanksgiving Day",
         month=10,
         year=2023,
@@ -84,7 +82,7 @@ ONTARIO_2023 = [
         nth_day=("mon", 2),
         province="Ontario",
     ),  # 2nd Monday in October
-    Holiday(
+    CanadaHoliday(
         "Christmas Day",
         month=12,
         year=2023,
@@ -92,7 +90,7 @@ ONTARIO_2023 = [
         date=datetime.date(2023, 12, 25),
         province="all",
     ),
-    Holiday(
+    CanadaHoliday(
         "Boxing Day",
         month=12,
         year=2023,
@@ -102,8 +100,106 @@ ONTARIO_2023 = [
     ),
 ]
 
+ONTARIO_2030 = [
+    CanadaHoliday(
+        "New Year's Day",
+        month=1,
+        year=2030,
+        day=1,
+        date=datetime.date(2030, 1, 1),
+        province="all",
+    ),
+    CanadaHoliday(
+        "Family Day",
+        month=2,
+        year=2030,
+        day=18,
+        date=datetime.date(2030, 2, 18),
+        nth_day=("mon", 3),
+        province="Ontario",
+    ),  # 3rd Monday in February
+    CanadaHoliday(
+        "Good Friday",
+        month=4,
+        year=2030,
+        day=19,
+        date=datetime.date(2030, 4, 19),
+        preceding_date=("fri", "Easter Sunday"),
+        province="Ontario",
+    ),  # Friday before Easter Sunday
+    CanadaHoliday(
+        "Victoria Day",
+        month=5,
+        year=2030,
+        day=20,
+        date=datetime.date(2030, 5, 20),
+        preceding_date=("mon", 25),
+        province="Ontario",
+    ),  # Monday before May 25th
+    CanadaHoliday(
+        "Canada Day",
+        month=7,
+        year=2030,
+        day=1,
+        date=datetime.date(2030, 7, 1),
+        province="all",
+    ),
+    CanadaHoliday(
+        "Civic Holiday",
+        month=8,
+        year=2030,
+        day=5,
+        date=datetime.date(2030, 8, 5),
+        nth_day=("mon", 1),
+        province="Ontario",
+    ),  # 1st Monday in August
+    CanadaHoliday(
+        "Labour Day",
+        month=9,
+        year=2030,
+        day=2,
+        date=datetime.date(2030, 9, 2),
+        nth_day=("mon", 1),
+        province="all",
+    ),  # 1st Monday in September
+    CanadaHoliday(
+        "National Day for Truth and Reconciliation",
+        month=9,
+        year=2030,
+        day=30,
+        date=datetime.date(2030, 9, 30),
+        province="all",
+    ),
+    CanadaHoliday(
+        "Thanksgiving Day",
+        month=10,
+        year=2030,
+        day=14,
+        date=datetime.date(2030, 10, 14),
+        nth_day=("mon", 2),
+        province="Ontario",
+    ),  # 2nd Monday in October
+    CanadaHoliday(
+        "Christmas Day",
+        month=12,
+        year=2030,
+        day=25,
+        date=datetime.date(2030, 12, 25),
+        province="all",
+    ),
+    CanadaHoliday(
+        "Boxing Day",
+        month=12,
+        year=2030,
+        day=26,
+        date=datetime.date(2030, 12, 26),
+        province="Ontario",
+    ),
+]
+
+
 UNSORTED_ONTARIO_2023 = [
-    Holiday(
+    CanadaHoliday(
         "Good Friday",
         month=4,
         year=2023,
@@ -112,7 +208,7 @@ UNSORTED_ONTARIO_2023 = [
         preceding_date=("fri", "Easter Sunday"),
         province="Ontario",
     ),  # Friday before Easter Sunday
-    Holiday(
+    CanadaHoliday(
         "Victoria Day",
         month=5,
         year=2023,
@@ -121,7 +217,7 @@ UNSORTED_ONTARIO_2023 = [
         preceding_date=("mon", 25),
         province="Ontario",
     ),  # Monday before May 25th
-    Holiday(
+    CanadaHoliday(
         "Thanksgiving Day",
         month=10,
         year=2023,
@@ -130,7 +226,7 @@ UNSORTED_ONTARIO_2023 = [
         nth_day=("mon", 2),
         province="Ontario",
     ),  # 2nd Monday in October
-    Holiday(
+    CanadaHoliday(
         "Christmas Day",
         month=12,
         year=2023,
@@ -138,7 +234,7 @@ UNSORTED_ONTARIO_2023 = [
         date=datetime.date(2023, 12, 25),
         province="all",
     ),
-    Holiday(
+    CanadaHoliday(
         "New Year's Day",
         month=1,
         year=2023,
@@ -146,7 +242,7 @@ UNSORTED_ONTARIO_2023 = [
         date=datetime.date(2023, 1, 1),
         province="all",
     ),
-    Holiday(
+    CanadaHoliday(
         "Family Day",
         month=2,
         year=2023,
@@ -155,7 +251,7 @@ UNSORTED_ONTARIO_2023 = [
         nth_day=("mon", 3),
         province="Ontario",
     ),  # 3rd Monday in February
-    Holiday(
+    CanadaHoliday(
         "Boxing Day",
         month=12,
         year=2023,
@@ -163,7 +259,7 @@ UNSORTED_ONTARIO_2023 = [
         date=datetime.date(2023, 12, 26),
         province="Ontario",
     ),
-    Holiday(
+    CanadaHoliday(
         "Canada Day",
         month=7,
         year=2023,
@@ -171,7 +267,7 @@ UNSORTED_ONTARIO_2023 = [
         date=datetime.date(2023, 7, 1),
         province="all",
     ),
-    Holiday(
+    CanadaHoliday(
         "Civic Holiday",
         month=8,
         year=2023,
@@ -180,7 +276,7 @@ UNSORTED_ONTARIO_2023 = [
         nth_day=("mon", 1),
         province="Ontario",
     ),  # 1st Monday in August
-    Holiday(
+    CanadaHoliday(
         "Labour Day",
         month=9,
         year=2023,
@@ -189,7 +285,7 @@ UNSORTED_ONTARIO_2023 = [
         nth_day=("mon", 1),
         province="all",
     ),  # 1st Monday in September
-    Holiday(
+    CanadaHoliday(
         "National Day for Truth and Reconciliation",
         month=9,
         year=2023,
@@ -200,7 +296,7 @@ UNSORTED_ONTARIO_2023 = [
 ]
 
 ONTARIO_2023_APRIL = [
-    Holiday(
+    CanadaHoliday(
         "Good Friday",
         month=4,
         year=2023,
@@ -212,7 +308,7 @@ ONTARIO_2023_APRIL = [
 ]
 
 ONTARIO_ONLY_HOLIDAYS_2023 = [
-    Holiday(
+    CanadaHoliday(
         "Family Day",
         month=2,
         year=2023,
@@ -221,7 +317,7 @@ ONTARIO_ONLY_HOLIDAYS_2023 = [
         nth_day=("mon", 3),
         province="Ontario",
     ),  # 3rd Monday in February
-    Holiday(
+    CanadaHoliday(
         "Good Friday",
         month=4,
         year=2023,
@@ -230,7 +326,7 @@ ONTARIO_ONLY_HOLIDAYS_2023 = [
         preceding_date=("fri", "Easter Sunday"),
         province="Ontario",
     ),  # Friday before Easter Sunday
-    Holiday(
+    CanadaHoliday(
         "Victoria Day",
         month=5,
         year=2023,
@@ -239,7 +335,7 @@ ONTARIO_ONLY_HOLIDAYS_2023 = [
         preceding_date=("mon", 25),
         province="Ontario",
     ),  # Monday before May 25th
-    Holiday(
+    CanadaHoliday(
         "Civic Holiday",
         month=8,
         year=2023,
@@ -248,7 +344,7 @@ ONTARIO_ONLY_HOLIDAYS_2023 = [
         nth_day=("mon", 1),
         province="Ontario",
     ),  # 1st Monday in August
-    Holiday(
+    CanadaHoliday(
         "Thanksgiving Day",
         month=10,
         year=2023,
@@ -257,7 +353,7 @@ ONTARIO_ONLY_HOLIDAYS_2023 = [
         nth_day=("mon", 2),
         province="Ontario",
     ),  # 2nd Monday in October
-    Holiday(
+    CanadaHoliday(
         "Boxing Day",
         month=12,
         year=2023,

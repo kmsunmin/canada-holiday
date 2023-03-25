@@ -1,5 +1,34 @@
+import calendar
 import datetime
 import math
+
+
+cal = calendar.Calendar()
+DAY_TO_INDEX = {
+    "mon": 0,
+    "monday": 0,
+    "tue": 1,
+    "tuesday": 1,
+    "wed": 2,
+    "wednesday": 2,
+    "thu": 3,
+    "thursday": 3,
+    "fri": 4,
+    "friday": 4,
+    "sat": 5,
+    "saturday": 5,
+    "sun": 6,
+    "sunday": 6,
+}
+INDEX_TO_DAY = {
+    0: "Monday",
+    1: "Tuesday",
+    2: "Wednesday",
+    3: "Thursday",
+    4: "Friday",
+    5: "Saturday",
+    6: "Sunday",
+}
 
 
 def check_province_name(prov: str):
@@ -43,23 +72,23 @@ def find_easter_day(year: int) -> datetime.date:
     # Use algorithm to find the date of Easter day
     # Reference: https://www.geeksforgeeks.org/how-to-calculate-the-easter-date-for-a-given-year-using-gauss-algorithm/
     """
-    A = year % 19
-    B = year % 4
-    C = year % 7
-    P = math.floor(year / 100)
-    Q = math.floor((13 + 8 * P) / 25)
-    M = 15 - Q + P - (P // 4) % 30
-    N = 4 + P - (P // 4) % 7
-    D = (19 * A + M) % 30
-    E = (N + 2 * B + 4 * C + 6 * D) % 7
-    days = 22 + D + E
+    a = year % 19
+    b = year % 4
+    c = year % 7
+    p = math.floor(year / 100)
+    q = math.floor((13 + 8 * p) / 25)
+    m = 15 - q + p - (p // 4) % 30
+    n = 4 + p - (p // 4) % 7
+    d = (19 * a + m) % 30
+    e = (n + 2 * b + 4 * c + 6 * d) % 7
+    days = 22 + d + e
 
     # A corner case: when D is 29
-    if (D == 29) and (E == 6):
+    if (d == 29) and (e == 6):
         easter_day = datetime.date(year, 4, 19)
         return easter_day
     # Another corner case: when D is 28
-    elif (D == 28) and (E == 6):
+    elif (d == 28) and (e == 6):
         easter_day = datetime.date(year, 4, 18)
         return easter_day
     else:
@@ -73,16 +102,20 @@ def find_easter_day(year: int) -> datetime.date:
             return easter_day
 
 
-def update_list_of_holidays_to_date(holidays: list, year: int) -> list:
-    updated_holidays_list = holidays.copy()
+def update_list_of_holidays(holiday_objs: list, year: int) -> list:
+    """
+    Update holidays to have date information on their instance.
+    """
+    updated_holidays_list = holiday_objs.copy()
     for h in updated_holidays_list:
         h.year = year
         h.date = h.to_date(year)
         h.day = h.date.day
+        h.day_of_the_week = INDEX_TO_DAY[h.date.weekday()]
     return updated_holidays_list
 
 
-def sort_list_of_holidays_by_date(holidays: list) -> list:
+def sort_list_of_holidays(holidays: list) -> list:
     """
     Sort the given list of Holidays bt their date.
     """
@@ -90,4 +123,19 @@ def sort_list_of_holidays_by_date(holidays: list) -> list:
 
 
 def filter_list_of_holidays_by_month(holidays: list, month: int) -> list:
+    """
+    Filter the given list of Holidays by the given month.
+    """
     return [h for h in holidays if h.month == month]
+
+
+def get_last_day_str_of_month(year: int, month: int, day_str: str) -> datetime.date:
+    """
+    Find the last day string of the month.
+    ex: last Sunday of the given month
+    """
+    day_idx = DAY_TO_INDEX[day_str]
+    weeks = cal.monthdatescalendar(year, month)
+    return (
+        weeks[-1][day_idx] if weeks[-1][day_idx].month == month else weeks[-2][day_idx]
+    )
