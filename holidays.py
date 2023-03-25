@@ -1,7 +1,7 @@
 from calendar import Calendar
 import datetime
 
-from holiday_instances import national, all
+from holiday_info import national, all
 from holiday_class import convert_holiday_info_to_obj
 from utils import (
     check_province_name,
