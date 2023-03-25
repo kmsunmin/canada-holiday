@@ -1,5 +1,5 @@
 import datetime
-from holiday import CanadaHoliday
+from holiday_class import CanadaHoliday
 
 
 NATIONAL_2023 = [

@@ -2,6 +2,7 @@ from calendar import Calendar
 import datetime
 
 from holiday_instances import national, all
+from holiday_class import convert_holiday_info_to_obj
 from utils import (
     check_province_name,
     filter_list_of_holidays_by_month,
@@ -26,30 +27,20 @@ def get_province_holidays(prov: str) -> list:
     return all_holidays_in_province
 
 
-def get_provincial_holiday_info(province: str) -> list:
-    provincial_holidays = []
-    province_name = check_province_name(province)
-    province_holidays = get_province_holidays(province_name)
-    provincial_holidays.extend(province_holidays)
-    print(f"Getting holiday information of {province_name} province...")
-
-    # Combine with Canadian national holidays
-    provincial_holidays.extend(NATIONAL)
-    return provincial_holidays
-
-
 def get_holidays(province: str, year: int, month: int = None) -> list:
     """
     Get all holidays of the given province in the given year.
+    If month is given, filter all_holidays for the given month.
     """
     holidays = get_province_holidays(province)
-    all_holidays = []
+    holiday_objs = [convert_holiday_info_to_obj(h) for h in holidays]
+    all_holidays = (
+        filter_list_of_holidays_by_month(holiday_objs, month)
+        if month and isinstance(month, int)
+        else holiday_objs
+    )
 
-    # If month presents, filter all_holidays for the given month
-    if month and isinstance(month, int):
-        all_holidays = filter_list_of_holidays_by_month(holidays, month)
-
-    # Update holiday objects to have date
+    # Update holiday objects to have date for the given year
     updated_all_holidays = update_list_of_holidays(all_holidays, year)
     sorted_all_holidays = sort_list_of_holidays(updated_all_holidays)
     return sorted_all_holidays

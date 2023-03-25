@@ -35,7 +35,7 @@ class CanadaHoliday:
         self.succeeding_date = succeeding_date
 
     def __repr__(self):
-        return f"CanadaHoliday({self.name}, {self.date}, {self.day_of_the_week})"
+        return f"CanadaHoliday({self.name}, {self.date}, {self.day_of_the_week}, {self.province})"
 
     def get_nth_day_holiday(self, year: int) -> datetime.date:
         if self.preceding_date or self.succeeding_date or self.nearest_day:
@@ -56,13 +56,7 @@ class CanadaHoliday:
         day_str_idx = DAY_TO_INDEX[day_str]
 
         if isinstance(preceding_day, str):
-            preceding_day_str_list = preceding_day.split()
-            if len(preceding_day_str_list) < 2:
-                raise Exception(
-                    f"Check the preceding day, ${preceding_day} of the month ${self.month}"
-                )
-
-            pre_day_str1, pre_day_str2 = preceding_day_str_list
+            pre_day_str1, pre_day_str2 = parse_preceding_day_str(preceding_day)
             if pre_day_str1.lower() == "last":
                 precede_date = get_last_day_str_of_month(
                     year, self.month, pre_day_str2.lower()
@@ -139,3 +133,28 @@ class CanadaHoliday:
             date = self.get_nearest_day_holiday(year)
 
         return date
+
+
+def parse_preceding_day_str(preceding_day: str):
+    preceding_day_str_list = preceding_day.split()
+    if len(preceding_day_str_list) < 2:
+        raise Exception(
+            f"Check the preceding day, ${preceding_day} of the month ${self.month}"
+        )
+    return preceding_day_str_list
+
+
+def convert_holiday_info_to_obj(holiday_info: dict):
+    return CanadaHoliday(
+        name=holiday_info.get("name", None),
+        month=holiday_info.get("month", None),
+        year=holiday_info.get("year", None),
+        day=holiday_info.get("day", None),
+        day_of_the_week=holiday_info.get("day_of_the_week", None),
+        date=holiday_info.get("date", None),
+        nearest_day=holiday_info.get("nearest_day", None),
+        nth_day=holiday_info.get("nth_day", None),
+        preceding_date=holiday_info.get("preceding_date", None),
+        province=holiday_info.get("province", None),
+        succeeding_date=holiday_info.get("succeeding_date", None),
+    )

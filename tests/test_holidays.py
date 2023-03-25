@@ -1,12 +1,12 @@
 import datetime
 
-from holiday_instances import ONTARIO
+from holiday_instances.on import ONTARIO
 from holidays import get_holidays, get_province_holidays, is_holiday
 from tests.fixtures.on import (
     ONTARIO_2023,
     ONTARIO_2023_APRIL,
 )
-from tests.utils.utils import compare_holidays_list
+from tests.utils import compare_holidays_list
 
 
 class TestCanadaHolidays:

@@ -1,14 +1,15 @@
 import datetime
 
-from holiday_instances import ONTARIO
-from tests.fixtures.on import (
-    ONTARIO_ONLY_HOLIDAYS_2023,
-    ONTARIO_2023,
-    UNSORTED_ONTARIO_2023,
-    ONTARIO_2023_APRIL,
-    CANADA_EASTER_DAY_2023,
+from holiday_class import (
+    convert_holiday_info_to_obj,
+    CanadaHoliday,
+    parse_preceding_day_str,
 )
-from tests.utils.utils import compare_holidays_list
+from tests.fixtures.on import (
+    ONTARIO_2023,
+    ONTARIO_2023_APRIL,
+)
+from tests.utils import compare_holidays, compare_holidays_list
 from utils import (
     check_province_name,
     update_list_of_holidays,
@@ -37,23 +38,100 @@ class TestUtils:
 
     def test_update_list_of_holidays_to_date_given_year(self):
         year = 2023
-        expected_holidays_list_with_date = ONTARIO_ONLY_HOLIDAYS_2023
+        expected_holiday_obj_list_with_date = [
+            CanadaHoliday(
+                "Labour Day",
+                month=9,
+                year=2023,
+                day=4,
+                date=datetime.date(2023, 9, 4),
+                nth_day=("mon", 1),  # 1st Monday in September
+                province="all",
+            )
+        ]
+        holiday_obj_list_without_date = [
+            CanadaHoliday(
+                "Labour Day",
+                month=9,
+                year=2023,
+                nth_day=("mon", 1),  # 1st Monday in September
+                province="all",
+            )
+        ]
 
-        ontario_holidays_without_date = ONTARIO
         actual_holidays_with_date = update_list_of_holidays(
-            ontario_holidays_without_date, year
+            holiday_obj_list_without_date, year
         )
         diff = compare_holidays_list(
-            expected_holidays_list_with_date, actual_holidays_with_date
+            expected_holiday_obj_list_with_date, actual_holidays_with_date
         )
 
         assert diff == []
 
     def test_sort_list_of_holidays_by_date(self):
-        expected_sorted_holidays = ONTARIO_2023
+        expected_sorted_holiday_objs = [
+            CanadaHoliday(
+                "Family Day",
+                month=2,
+                year=2023,
+                day=20,
+                date=datetime.date(2023, 2, 20),
+                nth_day=("mon", 3),
+                province="Ontario",
+            ),
+            CanadaHoliday(
+                "Victoria Day",
+                month=5,
+                year=2023,
+                day=22,
+                date=datetime.date(2023, 5, 22),
+                preceding_date=("mon", 25),
+                province="Ontario",
+            ),
+            CanadaHoliday(
+                "Labour Day",
+                month=9,
+                year=2023,
+                day=4,
+                date=datetime.date(2023, 9, 4),
+                nth_day=("mon", 1),
+                province="all",
+            ),
+        ]
+        unsorted_holiday_objs = [
+            CanadaHoliday(
+                "Labour Day",
+                month=9,
+                year=2023,
+                day=4,
+                date=datetime.date(2023, 9, 4),
+                nth_day=("mon", 1),
+                province="all",
+            ),
+            CanadaHoliday(
+                "Family Day",
+                month=2,
+                year=2023,
+                day=20,
+                date=datetime.date(2023, 2, 20),
+                nth_day=("mon", 3),
+                province="Ontario",
+            ),
+            CanadaHoliday(
+                "Victoria Day",
+                month=5,
+                year=2023,
+                day=22,
+                date=datetime.date(2023, 5, 22),
+                preceding_date=("mon", 25),
+                province="Ontario",
+            ),
+        ]
 
-        actual_sorted_holidays = sort_list_of_holidays(UNSORTED_ONTARIO_2023)
-        diff = compare_holidays_list(expected_sorted_holidays, actual_sorted_holidays)
+        actual_sorted_holidays = sort_list_of_holidays(unsorted_holiday_objs)
+        diff = compare_holidays_list(
+            expected_sorted_holiday_objs, actual_sorted_holidays
+        )
 
         assert diff == []
 
@@ -73,8 +151,9 @@ class TestUtils:
 
     def test_find_easter_day(self):
         year = 2023
-        expected_easter_day = find_easter_day(year)
-        assert expected_easter_day == CANADA_EASTER_DAY_2023
+        expected_easter_day = datetime.date(2023, 4, 9)
+        actual_easter_day = find_easter_day(year)
+        assert actual_easter_day == expected_easter_day
 
     def test_get_last_day_str_of_month(self):
         year = 2023
@@ -84,3 +163,30 @@ class TestUtils:
         )
         expected_last_sunday_of_february = datetime.date(2023, 2, 26)
         assert actual_last_sunday_of_february == expected_last_sunday_of_february
+
+    def test_convert_holiday_info_to_obj(self):
+        expected_holiday_obj = CanadaHoliday(
+            "New Year's Day",
+            month=1,
+            year=2023,
+            day=1,
+            date=datetime.date(2023, 1, 1),
+            province="all",
+        )
+        actual_holiday_info = {
+            "name": "New Year's Day",
+            "month": 1,
+            "year": 2023,
+            "day": 1,
+            "date": datetime.date(2023, 1, 1),
+            "province": "all",
+        }
+        actual_holiday_obj = convert_holiday_info_to_obj(actual_holiday_info)
+        result = compare_holidays(actual_holiday_obj, expected_holiday_obj)
+        assert result is True
+
+    def test_parse_preceding_day_str(self):
+        preceding_day_str = "Last Sunday"
+        expected_preceding_str_list = ["Last", "Sunday"]
+        actual_preceding_str_list = parse_preceding_day_str(preceding_day_str)
+        assert actual_preceding_str_list == expected_preceding_str_list

@@ -2,7 +2,7 @@ import datetime
 import json
 from typing import List
 
-from holiday import CanadaHoliday
+from holiday_class import CanadaHoliday
 
 
 def load_test_fixture_data(file_path: str):

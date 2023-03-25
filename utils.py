@@ -102,11 +102,11 @@ def find_easter_day(year: int) -> datetime.date:
             return easter_day
 
 
-def update_list_of_holidays(holidays: list, year: int) -> list:
+def update_list_of_holidays(holiday_objs: list, year: int) -> list:
     """
     Update holidays to have date information on their instance.
     """
-    updated_holidays_list = holidays.copy()
+    updated_holidays_list = holiday_objs.copy()
     for h in updated_holidays_list:
         h.year = year
         h.date = h.to_date(year)
