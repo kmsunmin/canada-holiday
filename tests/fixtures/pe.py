@@ -1,6 +1,6 @@
 import datetime
 
-from holiday_class import CanadaHoliday
+from canada_holiday.holiday_class import CanadaHoliday
 
 
 PRINCE_EDWARD_ISLAND_2023 = [

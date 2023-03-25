@@ -1,16 +1,11 @@
 import datetime
 
-from holiday_class import (
+from canada_holiday.holiday_class import (
     convert_holiday_info_to_obj,
     CanadaHoliday,
     parse_preceding_day_str,
 )
-from tests.fixtures.on import (
-    ONTARIO_2023,
-    ONTARIO_2023_APRIL,
-)
-from tests.utils import compare_holidays, compare_holidays_list
-from utils import (
+from canada_holiday.utils import (
     check_province_name,
     update_list_of_holidays,
     sort_list_of_holidays,
@@ -18,6 +13,11 @@ from utils import (
     find_easter_day,
     get_last_day_str_of_month,
 )
+from tests.fixtures.on import (
+    ONTARIO_2023,
+    ONTARIO_2023_APRIL,
+)
+from tests.utils import compare_holidays, compare_holidays_list
 
 
 class TestUtils:

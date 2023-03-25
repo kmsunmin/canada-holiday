@@ -1,7 +1,7 @@
 import datetime
 
-from holiday_info.on import ONTARIO
-from canada_holidays import get_holidays, get_province_holidays, is_holiday
+from canada_holiday.holiday_info.on import ONTARIO
+from canada_holiday.holidays import get_holidays, get_province_holidays, is_holiday
 from tests.fixtures.on import (
     ONTARIO_2023,
     ONTARIO_2023_APRIL,

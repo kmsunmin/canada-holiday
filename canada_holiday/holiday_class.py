@@ -1,7 +1,11 @@
 from calendar import Calendar
 import datetime
 
-from utils import DAY_TO_INDEX, find_easter_day, get_last_day_str_of_month
+from canada_holiday.utils import (
+    DAY_TO_INDEX,
+    find_easter_day,
+    get_last_day_str_of_month,
+)
 
 cal = Calendar()
 
