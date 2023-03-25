@@ -1,7 +1,25 @@
+import calendar
 import datetime
 import math
 
-from holiday import cal, DAY_TO_INDEX
+
+cal = calendar.Calendar()
+DAY_TO_INDEX = {
+    "mon": 0,
+    "monday": 0,
+    "tue": 1,
+    "tuesday": 1,
+    "wed": 2,
+    "wednesday": 2,
+    "thu": 3,
+    "thursday": 3,
+    "fri": 4,
+    "friday": 4,
+    "sat": 5,
+    "saturday": 5,
+    "sun": 6,
+    "sunday": 6,
+}
 
 
 def check_province_name(prov: str):
@@ -95,7 +113,7 @@ def filter_list_of_holidays_by_month(holidays: list, month: int) -> list:
     return [h for h in holidays if h.month == month]
 
 
-def get_last_day_str_of_month(self, year, month, day_str) -> datetime.date:
+def get_last_day_str_of_month(year: int, month: int, day_str: str) -> datetime.date:
     """
     Find the last day string of the month.
     ex: last Sunday of the given month
