@@ -1,21 +1,23 @@
-from holiday import Holiday
+from holiday import CanadaHoliday
 
 
 NEWFOUNDLAND_AND_LABRADOR = [
-    Holiday("St. Patrick's Day", month=3, day=17, province="Newfoundland and Labrador"),
-    Holiday(
+    CanadaHoliday(
+        "St. Patrick's Day", month=3, day=17, province="Newfoundland and Labrador"
+    ),
+    CanadaHoliday(
         "Good Friday",
         month=4,
         preceding_date=("fri", "Easter Sunday"),
         province="Newfoundland and Labrador",
     ),  # Friday before Easter Sunday
-    Holiday(
+    CanadaHoliday(
         "St. George's Day",
         month=4,
         nearest_day=("mon", 23),
         province="Newfoundland and Labrador",
     ),
-    Holiday(
+    CanadaHoliday(
         "Discovery Day",
         month=6,
         nearest_day=("mon", 24),

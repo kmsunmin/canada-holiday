@@ -1,20 +1,20 @@
-from holiday import Holiday
+from holiday import CanadaHoliday
 
 
 MANITOBA = [
-    Holiday(
+    CanadaHoliday(
         "Louis Riel Day", month=2, nth_day=("mon", 3), province="Manitoba"
     ),  # 3rd Monday in February
-    Holiday(
+    CanadaHoliday(
         "Good Friday",
         month=4,
         preceding_date=("fri", "Easter Sunday"),
         province="Manitoba",
     ),  # Friday before Easter Sunday
-    Holiday(
+    CanadaHoliday(
         "Victoria Day", month=5, preceding_date=("mon", 25), province="Manitoba"
     ),  # Monday before May 25th
-    Holiday(
+    CanadaHoliday(
         "Thanksgiving Day", month=10, nth_day=("mon", 2), province="Manitoba"
     ),  # 2nd Monday in October
 ]

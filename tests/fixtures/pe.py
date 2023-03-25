@@ -1,10 +1,10 @@
 import datetime
 
-from holiday import Holiday
+from holiday import CanadaHoliday
 
 
 PRINCE_EDWARD_ISLAND_2023 = [
-    Holiday(
+    CanadaHoliday(
         "New Year's Day",
         month=1,
         year=2023,
@@ -12,7 +12,7 @@ PRINCE_EDWARD_ISLAND_2023 = [
         date=datetime.date(2023, 1, 1),
         province="all",
     ),
-    Holiday(
+    CanadaHoliday(
         "Islander Day",
         month=2,
         year=2023,
@@ -21,7 +21,7 @@ PRINCE_EDWARD_ISLAND_2023 = [
         nth_day=("mon", 3),
         province="Prince Edward Island",
     ),  # 3rd Monday in February
-    Holiday(
+    CanadaHoliday(
         "Good Friday",
         month=4,
         year=2023,
@@ -30,7 +30,7 @@ PRINCE_EDWARD_ISLAND_2023 = [
         preceding_date=("fri", "Easter Sunday"),
         province="Prince Edward Island",
     ),  # Friday before Easter Sunday
-    Holiday(
+    CanadaHoliday(
         "Canada Day",
         month=7,
         year=2023,
@@ -38,7 +38,7 @@ PRINCE_EDWARD_ISLAND_2023 = [
         date=datetime.date(2023, 7, 1),
         province="all",
     ),
-    Holiday(
+    CanadaHoliday(
         "Labour Day",
         month=9,
         year=2023,
@@ -47,7 +47,7 @@ PRINCE_EDWARD_ISLAND_2023 = [
         nth_day=("mon", 1),
         province="all",
     ),  # 1st Monday in September
-    Holiday(
+    CanadaHoliday(
         "National Day for Truth and Reconciliation",
         month=9,
         year=2023,
@@ -55,7 +55,7 @@ PRINCE_EDWARD_ISLAND_2023 = [
         date=datetime.date(2023, 9, 30),
         province="all",
     ),
-    Holiday(
+    CanadaHoliday(
         "Christmas Day",
         month=12,
         year=2023,

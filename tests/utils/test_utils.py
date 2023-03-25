@@ -2,7 +2,7 @@ import datetime
 import json
 from typing import List
 
-from holiday import Holiday
+from holiday import CanadaHoliday
 
 
 def load_test_fixture_data(file_path: str):
@@ -21,7 +21,7 @@ def convert_fixture_data_to_holidays_list(fixture: dict, province: str = None) -
     return holidays
 
 
-def compare_holidays(h1: Holiday, h2: Holiday):
+def compare_holidays(h1: CanadaHoliday, h2: CanadaHoliday):
     """
     Check if the two given holidays are the same by checking their
     attributes.
@@ -39,7 +39,7 @@ def compare_holidays(h1: Holiday, h2: Holiday):
     )
 
 
-def compare_holidays_list(h1: List[Holiday], h2: List[Holiday]):
+def compare_holidays_list(h1: List[CanadaHoliday], h2: List[CanadaHoliday]):
     """
     set1 = set((x.id,x.name,...) for x in list1)
     difference = [ x for x in list2 if (x.id,x.name,...) not in set1 ]

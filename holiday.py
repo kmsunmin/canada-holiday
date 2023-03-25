@@ -7,7 +7,7 @@ cal = Calendar()
 DAY_TO_INDEX = {"mon": 0, "tue": 1, "wed": 2, "thr": 3, "fri": 4, "sat": 5, "sun": 6}
 
 
-class Holiday:
+class CanadaHoliday:
     def __init__(
         self,
         name: str,

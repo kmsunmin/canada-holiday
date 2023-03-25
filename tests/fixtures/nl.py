@@ -1,10 +1,10 @@
 import datetime
 
-from holiday import Holiday
+from holiday import CanadaHoliday
 
 
 NEWFOUNDLAND_AND_LABRADOR_2023 = [
-    Holiday(
+    CanadaHoliday(
         "New Year's Day",
         month=1,
         year=2023,
@@ -13,7 +13,7 @@ NEWFOUNDLAND_AND_LABRADOR_2023 = [
         province="all",
     ),
     # TODO: Check St.Patrick's day is nearest Monday
-    Holiday(
+    CanadaHoliday(
         "St. Patrick's Day",
         month=3,
         year=2023,
@@ -21,7 +21,7 @@ NEWFOUNDLAND_AND_LABRADOR_2023 = [
         date=datetime.date(2023, 3, 17),
         province="Newfoundland and Labrador",
     ),
-    Holiday(
+    CanadaHoliday(
         "Good Friday",
         month=4,
         year=2023,
@@ -30,7 +30,7 @@ NEWFOUNDLAND_AND_LABRADOR_2023 = [
         preceding_date=("fri", "Easter Sunday"),
         province="Newfoundland and Labrador",
     ),  # Friday before Easter Sunday
-    Holiday(
+    CanadaHoliday(
         "St. George's Day",
         month=4,
         year=2023,
@@ -39,7 +39,7 @@ NEWFOUNDLAND_AND_LABRADOR_2023 = [
         nearest_day=("mon", 23),
         province="Newfoundland and Labrador",
     ),
-    Holiday(
+    CanadaHoliday(
         "Discovery Day",
         month=6,
         year=2023,
@@ -49,7 +49,7 @@ NEWFOUNDLAND_AND_LABRADOR_2023 = [
         nearest_day=("mon", 24),
         province="Newfoundland and Labrador",
     ),
-    Holiday(
+    CanadaHoliday(
         "Canada Day",
         month=7,
         year=2023,
@@ -57,7 +57,7 @@ NEWFOUNDLAND_AND_LABRADOR_2023 = [
         date=datetime.date(2023, 7, 1),
         province="all",
     ),
-    Holiday(
+    CanadaHoliday(
         "Labour Day",
         month=9,
         year=2023,
@@ -66,7 +66,7 @@ NEWFOUNDLAND_AND_LABRADOR_2023 = [
         nth_day=("mon", 1),
         province="all",
     ),  # 1st Monday in September
-    Holiday(
+    CanadaHoliday(
         "National Day for Truth and Reconciliation",
         month=9,
         year=2023,
@@ -74,7 +74,7 @@ NEWFOUNDLAND_AND_LABRADOR_2023 = [
         date=datetime.date(2023, 9, 30),
         province="all",
     ),
-    Holiday(
+    CanadaHoliday(
         "Christmas Day",
         month=12,
         year=2023,
