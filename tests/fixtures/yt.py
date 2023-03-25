@@ -18,7 +18,7 @@ YUKON_2023 = [
         year=2023,
         day=24,
         date=datetime.date(2023, 2, 24),
-        nth_day=("fri", 3),
+        preceding_date=("fri", "Last Sunday"),
         province="Yukon",
     ),  # 3rd Monday in February
     CanadaHoliday(

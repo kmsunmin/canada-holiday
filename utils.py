@@ -1,6 +1,8 @@
 import datetime
 import math
 
+from holiday import cal, DAY_TO_INDEX
+
 
 def check_province_name(prov: str):
     province = prov.lower()
@@ -91,3 +93,16 @@ def sort_list_of_holidays_by_date(holidays: list) -> list:
 
 def filter_list_of_holidays_by_month(holidays: list, month: int) -> list:
     return [h for h in holidays if h.month == month]
+
+
+def get_last_day_str_of_month(self, year, month, day_str) -> datetime.date:
+    """
+    Find the last day string of the month.
+    ex: last Sunday of the given month
+    """
+    day_idx = DAY_TO_INDEX[day_str]
+    weeks = cal.monthdatescalendar(year, month)
+    if weeks[-1][day_idx].month == month:
+        return weeks[-1][day_idx]
+    else:
+        return weeks[-2][day_idx]

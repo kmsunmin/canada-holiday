@@ -16,7 +16,7 @@ from tests.fixtures import (
     SASKATCHEWAN_2023,
     YUKON_2023,
 )
-from tests.utils.test_utils import compare_holidays_list
+from tests.utils.utils import compare_holidays_list
 
 
 class TestCanadaProvincialHolidays:

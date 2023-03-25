@@ -1,10 +1,25 @@
 from calendar import Calendar
 import datetime
 
-from utils import find_easter_day
+from utils import find_easter_day, get_last_day_str_of_month
 
 cal = Calendar()
-DAY_TO_INDEX = {"mon": 0, "tue": 1, "wed": 2, "thr": 3, "fri": 4, "sat": 5, "sun": 6}
+DAY_TO_INDEX = {
+    "mon": 0,
+    "monday": 0,
+    "tue": 1,
+    "tuesday": 1,
+    "wed": 2,
+    "wednesday": 2,
+    "thu": 3,
+    "thursday": 3,
+    "fri": 4,
+    "friday": 4,
+    "sat": 5,
+    "saturday": 5,
+    "sun": 6,
+    "sunday": 6,
+}
 
 
 class CanadaHoliday:
@@ -40,7 +55,7 @@ class CanadaHoliday:
         day_idx = DAY_TO_INDEX[day_str]
         # TODO: edge case for n is not necessarily same as week index
         day_in_first_week = cal.monthdatescalendar(year, self.month)[0][day_idx]
-        if day_in_first_week.month == self.month and day_in_first_week.day > 7:
+        if day_in_first_week.month == self.month:
             return cal.monthdatescalendar(year, self.month)[n - 1][day_idx]
         else:
             return cal.monthdatescalendar(year, self.month)[n][day_idx]
@@ -52,8 +67,20 @@ class CanadaHoliday:
         day_str, preceding_day = self.preceding_date  # ex: Monday before May 25th
         day_str_idx = DAY_TO_INDEX[day_str]
 
-        if preceding_day == "Easter Sunday":
-            precede_date = find_easter_day(year)
+        if isinstance(preceding_day, str):
+            preceding_day_str_list = preceding_day.split()
+            if len(preceding_day_str_list) < 2:
+                raise Exception(
+                    f"Check the preceding day, ${preceding_day} of the month ${self.month}"
+                )
+
+            pre_day_str1, pre_day_str2 = preceding_day_str_list
+            if pre_day_str1.lower() == "last":
+                precede_date = get_last_day_str_of_month(
+                    year, self.month, pre_day_str2.lower()
+                )
+            elif preceding_day == "Easter Sunday":
+                precede_date = find_easter_day(year)
         else:
             precede_date = datetime.date(year, self.month, preceding_day)
         precede_day_idx = precede_date.weekday()

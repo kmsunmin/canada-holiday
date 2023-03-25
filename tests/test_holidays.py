@@ -15,7 +15,7 @@ from tests.fixtures.on import (
     UNSORTED_ONTARIO_2023,
     ONTARIO_ONLY_HOLIDAYS_2023,
 )
-from tests.utils.test_utils import compare_holidays_list
+from tests.utils.utils import compare_holidays_list
 
 
 class TestCanadaHolidays:
