@@ -2,7 +2,7 @@
 
 a Python package for Canadian holidays.
 
-# Usage
+## Usage
 ```python
 import datetime
 import canada_holiday
@@ -41,5 +41,3 @@ result = canada_holiday.is_holiday(date, "Nova Scotia")
 print(result)
 # False
 ```
-
-# How to run tests
