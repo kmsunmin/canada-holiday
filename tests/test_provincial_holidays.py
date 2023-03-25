@@ -1,6 +1,6 @@
 import pytest
 
-from holidays import get_all_holidays
+from holidays import get_holidays
 from tests.fixtures import (
     ALBERTA_2023,
     BRITISH_COLUMBIA_2023,
@@ -42,7 +42,7 @@ class TestCanadaProvincialHolidays:
         self, expected_holidays, province_name
     ):
         year = 2023
-        actual_holidays = get_all_holidays(province_name, year)
+        actual_holidays = get_holidays(province_name, year)
         diff = compare_holidays_list(expected_holidays, actual_holidays)
 
         assert diff == []

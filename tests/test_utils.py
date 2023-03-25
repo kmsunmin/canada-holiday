@@ -1,6 +1,6 @@
 import datetime
 
-from constants import ONTARIO
+from holiday_instances import ONTARIO
 from tests.fixtures.on import (
     ONTARIO_ONLY_HOLIDAYS_2023,
     ONTARIO_2023,
@@ -11,8 +11,8 @@ from tests.fixtures.on import (
 from tests.utils.utils import compare_holidays_list
 from utils import (
     check_province_name,
-    update_list_of_holidays_to_date,
-    sort_list_of_holidays_by_date,
+    update_list_of_holidays,
+    sort_list_of_holidays,
     filter_list_of_holidays_by_month,
     find_easter_day,
     get_last_day_str_of_month,
@@ -40,7 +40,7 @@ class TestUtils:
         expected_holidays_list_with_date = ONTARIO_ONLY_HOLIDAYS_2023
 
         ontario_holidays_without_date = ONTARIO
-        actual_holidays_with_date = update_list_of_holidays_to_date(
+        actual_holidays_with_date = update_list_of_holidays(
             ontario_holidays_without_date, year
         )
         diff = compare_holidays_list(
@@ -52,7 +52,7 @@ class TestUtils:
     def test_sort_list_of_holidays_by_date(self):
         expected_sorted_holidays = ONTARIO_2023
 
-        actual_sorted_holidays = sort_list_of_holidays_by_date(UNSORTED_ONTARIO_2023)
+        actual_sorted_holidays = sort_list_of_holidays(UNSORTED_ONTARIO_2023)
         diff = compare_holidays_list(expected_sorted_holidays, actual_sorted_holidays)
 
         assert diff == []

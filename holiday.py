@@ -1,25 +1,9 @@
 from calendar import Calendar
 import datetime
 
-from utils import find_easter_day, get_last_day_str_of_month
+from utils import DAY_TO_INDEX, find_easter_day, get_last_day_str_of_month
 
 cal = Calendar()
-DAY_TO_INDEX = {
-    "mon": 0,
-    "monday": 0,
-    "tue": 1,
-    "tuesday": 1,
-    "wed": 2,
-    "wednesday": 2,
-    "thu": 3,
-    "thursday": 3,
-    "fri": 4,
-    "friday": 4,
-    "sat": 5,
-    "saturday": 5,
-    "sun": 6,
-    "sunday": 6,
-}
 
 
 class CanadaHoliday:
@@ -30,6 +14,7 @@ class CanadaHoliday:
         *,
         year: int = None,
         day: int = None,
+        day_of_the_week: str = None,
         date: datetime.date = None,
         nearest_day: (str, int) = None,
         nth_day: (str, int) = None,
@@ -40,7 +25,8 @@ class CanadaHoliday:
         self.name = name
         self.month = month
         self.year = year
-        self.day = day  # ex: Monday, Tuesday
+        self.day = day
+        self.day_of_the_week = day_of_the_week
         self.date = date  # ex: datetime.date(2023, 12, 25)
         self.nearest_day = nearest_day
         self.nth_day = nth_day
@@ -48,12 +34,14 @@ class CanadaHoliday:
         self.province = province
         self.succeeding_date = succeeding_date
 
+    def __repr__(self):
+        return f"CanadaHoliday({self.name}, {self.date}, {self.day_of_the_week})"
+
     def get_nth_day_holiday(self, year: int) -> datetime.date:
         if self.preceding_date or self.succeeding_date or self.nearest_day:
             raise Exception(f"Please check the Holiday: {self.name}.")
         day_str, n = self.nth_day
         day_idx = DAY_TO_INDEX[day_str]
-        # TODO: edge case for n is not necessarily same as week index
         day_in_first_week = cal.monthdatescalendar(year, self.month)[0][day_idx]
         if day_in_first_week.month == self.month:
             return cal.monthdatescalendar(year, self.month)[n - 1][day_idx]

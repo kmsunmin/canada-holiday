@@ -1,7 +1,6 @@
 from .ab import ALBERTA
 from .bc import BRITISH_COLUMBIA
 from .mb import MANITOBA
-from .national import NATIONAL
 from .nb import NEW_BRUNSWICK
 from .nl import NEWFOUNDLAND_AND_LABRADOR
 from .ns import NOVA_SCOTIA
@@ -17,7 +16,6 @@ __all__ = [
     ALBERTA,
     BRITISH_COLUMBIA,
     MANITOBA,
-    NATIONAL,
     NEW_BRUNSWICK,
     NEWFOUNDLAND_AND_LABRADOR,
     NOVA_SCOTIA,

@@ -1,7 +1,7 @@
 from holiday import CanadaHoliday
 
 
-NATIONAL = [
+HOLIDAYS = [
     CanadaHoliday("New Year's Day", month=1, day=1, province="all"),
     CanadaHoliday("Canada Day", month=7, day=1, province="all"),
     CanadaHoliday(

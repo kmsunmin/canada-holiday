@@ -1,0 +1,31 @@
+from holiday_instances import (
+    ALBERTA,
+    BRITISH_COLUMBIA,
+    MANITOBA,
+    NEW_BRUNSWICK,
+    NEWFOUNDLAND_AND_LABRADOR,
+    NORTHWEST_TERRITORIES,
+    NOVA_SCOTIA,
+    NUNAVUT,
+    ONTARIO,
+    PRINCE_EDWARD_ISLAND,
+    QUEBEC,
+    SASKATCHEWAN,
+    YUKON,
+)
+
+HOLIDAYS_DICT = {
+    "Alberta": ALBERTA,
+    "British Columbia": BRITISH_COLUMBIA,
+    "Manitoba": MANITOBA,
+    "New Brunswick": NEW_BRUNSWICK,
+    "Newfoundland and Labrador": NEWFOUNDLAND_AND_LABRADOR,
+    "Northwest Territories": NORTHWEST_TERRITORIES,
+    "Nova Scotia": NOVA_SCOTIA,
+    "Nunavut": NUNAVUT,
+    "Ontario": ONTARIO,
+    "Prince Edward Island": PRINCE_EDWARD_ISLAND,
+    "Quebec": QUEBEC,
+    "Saskatchewan": SASKATCHEWAN,
+    "Yukon": YUKON,
+}

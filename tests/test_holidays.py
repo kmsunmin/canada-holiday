@@ -1,7 +1,7 @@
 import datetime
 
-from constants import ONTARIO
-from holidays import get_all_holidays, get_province_holidays, is_holiday
+from holiday_instances import ONTARIO
+from holidays import get_holidays, get_province_holidays, is_holiday
 from tests.fixtures.on import (
     ONTARIO_2023,
     ONTARIO_2023_APRIL,
@@ -19,7 +19,7 @@ class TestCanadaHolidays:
         year = 2023
         expected_holidays = ONTARIO_2023
 
-        actual_holidays = get_all_holidays("Ontario", year)
+        actual_holidays = get_holidays("Ontario", year)
         diff = compare_holidays_list(expected_holidays, actual_holidays)
 
         assert diff == []
@@ -28,7 +28,7 @@ class TestCanadaHolidays:
         year = 2023
         month = 4
         expected_holidays = ONTARIO_2023_APRIL
-        actual_holidays = get_all_holidays("Ontario", year, month)
+        actual_holidays = get_holidays("Ontario", year, month)
         diff = compare_holidays_list(expected_holidays, actual_holidays)
 
         assert diff == []
@@ -36,15 +36,9 @@ class TestCanadaHolidays:
     def test_is_holiday_returns_false_to_non_holiday(self):
         # September 9th 2023 is not a holiday in Ontario
         test_date = datetime.date(2023, 9, 9)
-        assert (
-            is_holiday(test_date.year, test_date.month, test_date.day, "Ontario")
-            is False
-        )
+        assert is_holiday(test_date, "Ontario") is False
 
     def test_is_holiday_returns_true_to_valid_holiday(self):
         # May 22nd 2023 is Victoria Day in Ontario
         test_date = datetime.date(2023, 5, 22)
-        assert (
-            is_holiday(test_date.year, test_date.month, test_date.day, "Ontario")
-            is True
-        )
+        assert is_holiday(test_date, "Ontario") is True
