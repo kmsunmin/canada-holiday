@@ -2,18 +2,6 @@
 
 a Python package for Canadian holidays.
 
-# Installation
-
-### With pip
-```bash
-$ pip install canada-holiday
-```
-
-### With poetry
-```bash
-$ poetry add canada-holiday
-```
-
 # Usage
 ```python
 import datetime
