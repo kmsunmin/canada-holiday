@@ -19,20 +19,10 @@ $ poetry add canada-holiday
 import datetime
 import canada_holidays
 
-ontario_holidays_2023 = canada_holidays.get_holidays("Ontario", 2023)
+on_holidays_2023 = canada_holidays.get_holidays("Ontario", 2023)
 # prints "Getting holiday information of Ontario province..."
-print(ontario_holidays_2023)
+print(on_holidays_2023)
 # [CanadaHoliday(New Year's Day, 2023-01-01, Sunday, all), CanadaHoliday(Family Day, 2023-02-20, Monday, Ontario), ...]
-print(ontario_holidays_2023[0].name)
-# New Year's Day
-print(ontario_holidays_2023[0].date)  # from datetime.date object
-# 2023-01-01
-print(ontario_holidays_2023[0].year)
-# 2023
-print(ontario_holidays_2023[0].province)
-# all
-print(ontario_holidays_2023[0].day_of_the_week)
-# Sunday
 
 manitoba_holidays_2023_june = canada_holidays.get_holidays("MB", 2023, 2)
 # prints "Getting holiday information of Manitoba province..."
@@ -49,6 +39,8 @@ print(louis_riel_day.date)
 # 2023-02-20
 print(louis_riel_day.province)
 # Manitoba
+print(louis_riel_day.day_of_the_week)
+# Monday
 
 date = datetime.date(2023, 8, 7)
 result = canada_holidays.is_holiday(date, "British Columbia")
