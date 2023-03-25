@@ -1,3 +1,3 @@
-from .holidays import *
-from .holiday_info import *
-from .utils import *
+from canada_holiday.holidays import *
+from canada_holiday.holiday_info import *
+from canada_holiday.utils import *
