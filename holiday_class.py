@@ -139,7 +139,7 @@ def parse_preceding_day_str(preceding_day: str):
     preceding_day_str_list = preceding_day.split()
     if len(preceding_day_str_list) < 2:
         raise Exception(
-            f"Check the preceding day, ${preceding_day} of the month ${self.month}"
+            f"Please check the preceding day, ${preceding_day} of the month"
         )
     return preceding_day_str_list
 
