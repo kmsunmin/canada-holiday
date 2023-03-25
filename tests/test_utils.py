@@ -10,6 +10,7 @@ from tests.fixtures.on import (
 )
 from tests.utils.utils import compare_holidays_list
 from utils import (
+    check_province_name,
     update_list_of_holidays_to_date,
     sort_list_of_holidays_by_date,
     filter_list_of_holidays_by_month,
@@ -19,6 +20,21 @@ from utils import (
 
 
 class TestUtils:
+    def test_check_province_name(self):
+        assert check_province_name("ab") == "Alberta"
+        assert check_province_name("bc") == "British Columbia"
+        assert check_province_name("mb") == "Manitoba"
+        assert check_province_name("nb") == "New Brunswick"
+        assert check_province_name("nl") == "Newfoundland and Labrador"
+        assert check_province_name("ns") == "Nova Scotia"
+        assert check_province_name("nt") == "Northwest Territories"
+        assert check_province_name("nu") == "Nunavut"
+        assert check_province_name("on") == "Ontario"
+        assert check_province_name("pe") == "Prince Edward Island"
+        assert check_province_name("qc") == "Quebec"
+        assert check_province_name("sk") == "Saskatchewan"
+        assert check_province_name("yt") == "Yukon"
+
     def test_update_list_of_holidays_to_date_given_year(self):
         year = 2023
         expected_holidays_list_with_date = ONTARIO_ONLY_HOLIDAYS_2023
