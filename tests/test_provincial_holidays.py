@@ -1,6 +1,6 @@
 import pytest
 
-from holidays import get_holidays
+from canada_holidays import get_holidays
 from tests.fixtures import (
     ALBERTA_2023,
     ALBERTA_2030,

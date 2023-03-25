@@ -56,12 +56,10 @@ def is_holiday(date: datetime.date, prov: str) -> bool:
     for h in holidays_for_province:
         if h.date == date:
             print(
-                f"{date.month}-{date.day}-{date.year} is a holiday, {h.name} in {h.province} province(s) in Canada"
+                f"{date} is a holiday, {h.name} in {h.province} province(s) in Canada"
             )
             return True
-        print(
-            f"{date.month}-{date.day}-{date.year} is not a holiday in {province_name} province."
-        )
+        print(f"{date} is not a holiday in {province_name} province.")
         return False
 
 
