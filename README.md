@@ -1,5 +1,7 @@
 # canada-holiday
 
+![example workflow](https://github.com/kmsunmin/canada-holiday/actions/workflows/run-tests.yml/badge.svg)
+
 a Python package for Canadian holidays.
 
 ## Installation
