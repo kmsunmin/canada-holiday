@@ -61,8 +61,3 @@ def is_holiday(date: datetime.date, prov: str) -> bool:
             return True
         print(f"{date} is not a holiday in {province_name} province.")
         return False
-
-
-if __name__ == "__main__":
-    results = get_holidays("Ontario", 2023)
-    print(results)
