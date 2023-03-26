@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "canada_holiday"
-version = "1.0.0"
+version = "1.0.1"
 description = "Python package for Canadian holidays"
 authors = ["Sunmin Kim <kmsunmin@gmail.com>"]
 readme = "README.md"
