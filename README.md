@@ -2,7 +2,7 @@
 
 ![example workflow](https://github.com/kmsunmin/canada-holiday/actions/workflows/run-tests.yml/badge.svg)
 
-a Python package for Canadian holidays.
+a Python package for retrieving Canadian holidays information for all provinces for any given year.
 
 ## Installation
 
