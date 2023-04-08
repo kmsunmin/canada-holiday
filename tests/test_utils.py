@@ -1,7 +1,7 @@
 import datetime
 
+from canada_holiday.holidays import convert_holiday_info_to_obj
 from canada_holiday.holiday_class import (
-    convert_holiday_info_to_obj,
     CanadaHoliday,
     parse_preceding_day_str,
 )
