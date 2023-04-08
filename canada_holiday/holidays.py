@@ -2,7 +2,7 @@ from calendar import Calendar
 import datetime
 
 from canada_holiday.holiday_info import national, all
-from canada_holiday.holiday_class import convert_holiday_info_to_obj
+from canada_holiday.holiday_class import CanadaHoliday
 from canada_holiday.utils import (
     check_province_name,
     filter_list_of_holidays_by_month,
@@ -61,3 +61,19 @@ def is_holiday(date: datetime.date, prov: str) -> bool:
             return True
         print(f"{date} is not a holiday in {province_name} province.")
         return False
+
+
+def convert_holiday_info_to_obj(holiday_info: dict):
+    return CanadaHoliday(
+        name=holiday_info.get("name", None),
+        month=holiday_info.get("month", None),
+        year=holiday_info.get("year", None),
+        day=holiday_info.get("day", None),
+        day_of_the_week=holiday_info.get("day_of_the_week", None),
+        date=holiday_info.get("date", None),
+        nearest_day=holiday_info.get("nearest_day", None),
+        nth_day=holiday_info.get("nth_day", None),
+        preceding_date=holiday_info.get("preceding_date", None),
+        province=holiday_info.get("province", None),
+        succeeding_date=holiday_info.get("succeeding_date", None),
+    )

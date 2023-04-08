@@ -139,3 +139,12 @@ def get_last_day_str_of_month(year: int, month: int, day_str: str) -> datetime.d
     return (
         weeks[-1][day_idx] if weeks[-1][day_idx].month == month else weeks[-2][day_idx]
     )
+
+
+def parse_preceding_day_str(preceding_day: str):
+    preceding_day_str_list = preceding_day.split()
+    if len(preceding_day_str_list) < 2:
+        raise Exception(
+            f"Please check the preceding day, ${preceding_day} of the month"
+        )
+    return preceding_day_str_list
