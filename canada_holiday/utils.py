@@ -152,7 +152,7 @@ def parse_preceding_day_str(preceding_day: str):
 
 
 def get_day_of_the_week_idx(
-    day_condition: tuple[str, Union[int | str]]
+    day_condition: tuple[str, Union[int, str]]
 ) -> tuple[int, Union[int, str]]:
     day_of_the_week, condition = day_condition
     return DAY_TO_INDEX[day_of_the_week], condition
