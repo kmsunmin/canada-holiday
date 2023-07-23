@@ -148,3 +148,10 @@ def parse_preceding_day_str(preceding_day: str):
             f"Please check the preceding day, ${preceding_day} of the month"
         )
     return preceding_day_str_list
+
+
+def get_day_of_the_week_idx(
+    day_condition: tuple[str, int | str]
+) -> tuple[int, int | str]:
+    day_of_the_week, condition = day_condition
+    return DAY_TO_INDEX[day_of_the_week], condition

@@ -4,6 +4,7 @@ import datetime
 from canada_holiday.utils import (
     DAY_TO_INDEX,
     find_easter_day,
+    get_day_of_the_week_idx,
     get_last_day_str_of_month,
     parse_preceding_day_str,
 )
@@ -71,11 +72,16 @@ class CanadaHoliday:
             invalid = any([self.nth_day, self.preceding_date, self.nearest_day])
 
         if invalid:
-            raise Exception(f"Cannot validate the Holiday. Please check the Holiday: {self.name}.")
+            raise Exception(
+                f"Cannot validate the Holiday. Please check the Holiday: {self.name}."
+            )
 
     def get_nth_day_holiday(self, year: int) -> datetime.date:
-        day_of_the_week, n = self.nth_day
-        day_of_the_week_idx = DAY_TO_INDEX[day_of_the_week]
+        """
+        Get holiday that has a rule of being nth day of a month.
+        ex: Thanksgiving Day is 2nd Monday in October.
+        """
+        day_of_the_week_idx, n = get_day_of_the_week_idx(self.nth_day)
         day_in_first_week = cal.monthdatescalendar(year, self.month)[0][
             day_of_the_week_idx
         ]
@@ -85,11 +91,13 @@ class CanadaHoliday:
             return cal.monthdatescalendar(year, self.month)[n][day_of_the_week_idx]
 
     def get_preceding_day_holiday(self, year: int) -> datetime.date:
-        (
-            day_of_the_week,
-            preceding_day,
-        ) = self.preceding_date  # ex: Monday before May 25th
-        day_of_the_week_idx = DAY_TO_INDEX[day_of_the_week]
+        """
+        Get holiday that has a rule of being a day before a certain date
+        ex: Victoria Day is Monday before May 25th.
+        """
+        day_of_the_week_idx, preceding_day = get_day_of_the_week_idx(
+            self.preceding_date
+        )
         precede_date = None
 
         if isinstance(preceding_day, str):
@@ -108,11 +116,13 @@ class CanadaHoliday:
         return precede_date - datetime.timedelta(days=delta_days)
 
     def get_succeeding_day_holiday(self, year: int) -> datetime.date:
-        (
-            day_of_the_week,
-            succeeding_day,
-        ) = self.succeeding_date  # ex: Monday after Easter Sunday
-        day_of_the_week_idx = DAY_TO_INDEX[day_of_the_week]
+        """
+        Get holiday that has a rule of being a day after a certain date.
+        ex: Easter Monday is a Monday after Easter Sunday.
+        """
+        day_of_the_week_idx, succeeding_day = get_day_of_the_week_idx(
+            self.succeeding_date
+        )
 
         if succeeding_day == "Easter Sunday":
             succeed_date = find_easter_day(year)
@@ -124,8 +134,11 @@ class CanadaHoliday:
 
     def get_nearest_day_holiday(self, year: int) -> datetime.date:
         """
-        Example of calculating a nearest Monday:
-        - if holiday day is 23:
+        Get holiday that has a rule of being a day nearest to a certain date.
+        ex: St. George's Day is a Monday that's nearest to April 23rd.
+
+        Example of calculating a nearest Monday (0):
+        - if the given, certain date is on 23rd:
             - if 23 is Tuesday (1)   Monday (0) day - delta:1
             - if 23 is Wednesday (2) Monday (0) day - delta:2
             - if 23 is Thursday (3)  Monday (0) day - delta:3
@@ -133,11 +146,10 @@ class CanadaHoliday:
             - if 23 is Saturday (5)  Monday (0) day + (7 - delta:5)
             - if 23 is Sunday (6)    Monday (0) day + (7 - delta:6)
         """
-        day_str, nearest_day = self.nearest_day
-        day_str_idx = DAY_TO_INDEX[day_str]
+        day_of_the_week_idx, _ = get_day_of_the_week_idx(self.nearest_day)
         nearest_date = datetime.date(year, self.month, self.nearest_day[1])
         nearest_day_str_idx = nearest_date.weekday()
-        delta_days = abs(day_str_idx - nearest_day_str_idx)
+        delta_days = abs(day_of_the_week_idx - nearest_day_str_idx)
 
         if delta_days < 4:
             return nearest_date - datetime.timedelta(delta_days)
@@ -146,14 +158,9 @@ class CanadaHoliday:
 
     def to_date(self, year: int):
         """
-        Calculate the datetime.date of the given holiday
+        Calculate the datetime.date of the given holiday.
         """
-        if (
-            not self.nth_day
-            and not self.preceding_date
-            and not self.succeeding_date
-            and not self.nearest_day
-        ):
+        if self.month and self.day:
             return datetime.date(year, self.month, self.day)
 
         date = None
