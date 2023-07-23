@@ -11,6 +11,7 @@ from canada_holiday.utils import (
     sort_list_of_holidays,
     filter_list_of_holidays_by_month,
     find_easter_day,
+    get_day_of_the_week_idx,
     get_last_day_str_of_month,
 )
 from tests.fixtures.on import (
@@ -190,3 +191,17 @@ class TestUtils:
         expected_preceding_str_list = ["Last", "Sunday"]
         actual_preceding_str_list = parse_preceding_day_str(preceding_day_str)
         assert actual_preceding_str_list == expected_preceding_str_list
+
+    def test_get_day_of_the_week_idx_with(self):
+        # Condition that has 2nd Monday in October (Thanksgiving Day)
+        day_condition = ("mon", 2)
+        day_of_the_week_idx, condition = get_day_of_the_week_idx(day_condition)
+        assert day_of_the_week_idx == 0
+        assert condition == 2
+
+    def test_get_day_of_the_week_idx_with_good_friday(self):
+        # Condition that has preceding_day (Good Friday)
+        day_condition = ("fri", "Easter Sunday")
+        day_of_the_week_idx, condition = get_day_of_the_week_idx(day_condition)
+        assert day_of_the_week_idx == 4
+        assert condition == "Easter Sunday"
