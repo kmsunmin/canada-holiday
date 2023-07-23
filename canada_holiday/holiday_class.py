@@ -62,13 +62,13 @@ class CanadaHoliday:
     def validate_holiday_condition(self) -> None:
         invalid = False
         if self.nth_day:
-            invalid = any(self.preceding_date or self.succeeding_date or self.nearest_day)
+            invalid = any([self.preceding_date, self.succeeding_date, self.nearest_day])
         elif self.nearest_day:
-            invalid = any(self.nth_day or self.preceding_date or self.succeeding_date)
+            invalid = any([self.nth_day, self.preceding_date, self.succeeding_date])
         elif self.preceding_date:
-            invalid = any(self.nth_day or self.succeeding_date or self.nearest_day)
+            invalid = any([self.nth_day, self.succeeding_date, self.nearest_day])
         elif self.succeeding_date:
-            invalid = any(self.nth_day or self.preceding_date or self.nearest_day)
+            invalid = any([self.nth_day, self.preceding_date, self.nearest_day])
 
         if invalid:
             raise Exception(f"Cannot validate the Holiday. Please check the Holiday: {self.name}.")
