@@ -38,6 +38,8 @@ class CanadaHoliday:
         self.province = province
         self.succeeding_date = succeeding_date
 
+        self.validate_holiday_condition()
+
     def __repr__(self):
         return f"CanadaHoliday({self.name}, {self.date}, {self.day_of_the_week}, {self.province})"
 
@@ -57,9 +59,25 @@ class CanadaHoliday:
     def day_of_the_week(self, day_of_the_week: str):
         self._day_of_the_week = day_of_the_week
 
-    def get_nth_day_holiday(self, year: int) -> datetime.date:
-        if self.preceding_date or self.succeeding_date or self.nearest_day:
+    def validate_holiday_condition(self) -> None:
+        invalid = False
+        if self.nth_day:
+            if self.preceding_date or self.succeeding_date or self.nearest_day:
+                invalid = True
+        elif self.nearest_day:
+            if self.nth_day or self.preceding_date or self.succeeding_date:
+                invalid = True
+        elif self.preceding_date:
+            if self.nth_day or self.succeeding_date or self.nearest_day:
+                invalid = True
+        elif self.succeeding_date:
+            if self.nth_day or self.preceding_date or self.nearest_day:
+                invalid = True
+
+        if invalid:
             raise Exception(f"Please check the Holiday: {self.name}.")
+
+    def get_nth_day_holiday(self, year: int) -> datetime.date:
         day_of_the_week, n = self.nth_day
         day_of_the_week_idx = DAY_TO_INDEX[day_of_the_week]
         day_in_first_week = cal.monthdatescalendar(year, self.month)[0][
@@ -71,20 +89,18 @@ class CanadaHoliday:
             return cal.monthdatescalendar(year, self.month)[n][day_of_the_week_idx]
 
     def get_preceding_day_holiday(self, year: int) -> datetime.date:
-        if self.nth_day or self.succeeding_date or self.nearest_day:
-            raise Exception(f"Please check the Holiday: {self.name}.")
-
         (
             day_of_the_week,
             preceding_day,
         ) = self.preceding_date  # ex: Monday before May 25th
         day_of_the_week_idx = DAY_TO_INDEX[day_of_the_week]
+        precede_date = None
 
         if isinstance(preceding_day, str):
-            pre_day_str1, pre_day_str2 = parse_preceding_day_str(preceding_day)
-            if pre_day_str1.lower() == "last":
+            order_of_day, day_str = parse_preceding_day_str(preceding_day)
+            if order_of_day.lower() == "last":
                 precede_date = get_last_day_str_of_month(
-                    year, self.month, pre_day_str2.lower()
+                    year, self.month, day_str.lower()
                 )
             elif preceding_day == "Easter Sunday":
                 precede_date = find_easter_day(year)
@@ -96,9 +112,6 @@ class CanadaHoliday:
         return precede_date - datetime.timedelta(days=delta_days)
 
     def get_succeeding_day_holiday(self, year: int) -> datetime.date:
-        if self.nth_day or self.preceding_date or self.nearest_day:
-            raise Exception(f"Please check the Holiday: {self.name}.")
-
         (
             day_of_the_week,
             succeeding_day,
@@ -124,9 +137,6 @@ class CanadaHoliday:
             - if 23 is Friday (4)    Monday (0) day + (7 - delta:4)
             - if 23 is Saturday (5)  Monday (0) day + (7 - delta:5)
         """
-        if self.nth_day or self.preceding_date or self.succeeding_date:
-            raise Exception(f"Please check the Holiday: {self.name}.")
-
         day_str, nearest_day = self.nearest_day
         day_str_idx = DAY_TO_INDEX[day_str]
         nearest_date = datetime.date(year, self.month, self.nearest_day[1])
