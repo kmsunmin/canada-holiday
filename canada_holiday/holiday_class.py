@@ -62,20 +62,16 @@ class CanadaHoliday:
     def validate_holiday_condition(self) -> None:
         invalid = False
         if self.nth_day:
-            if self.preceding_date or self.succeeding_date or self.nearest_day:
-                invalid = True
+            invalid = any(self.preceding_date or self.succeeding_date or self.nearest_day)
         elif self.nearest_day:
-            if self.nth_day or self.preceding_date or self.succeeding_date:
-                invalid = True
+            invalid = any(self.nth_day or self.preceding_date or self.succeeding_date)
         elif self.preceding_date:
-            if self.nth_day or self.succeeding_date or self.nearest_day:
-                invalid = True
+            invalid = any(self.nth_day or self.succeeding_date or self.nearest_day)
         elif self.succeeding_date:
-            if self.nth_day or self.preceding_date or self.nearest_day:
-                invalid = True
+            invalid = any(self.nth_day or self.preceding_date or self.nearest_day)
 
         if invalid:
-            raise Exception(f"Please check the Holiday: {self.name}.")
+            raise Exception(f"Cannot validate the Holiday. Please check the Holiday: {self.name}.")
 
     def get_nth_day_holiday(self, year: int) -> datetime.date:
         day_of_the_week, n = self.nth_day
@@ -130,12 +126,12 @@ class CanadaHoliday:
         """
         Example of calculating a nearest Monday:
         - if holiday day is 23:
-            - if 23 is Sunday (6)    Monday (0) day + (7 - delta:6)
             - if 23 is Tuesday (1)   Monday (0) day - delta:1
             - if 23 is Wednesday (2) Monday (0) day - delta:2
             - if 23 is Thursday (3)  Monday (0) day - delta:3
             - if 23 is Friday (4)    Monday (0) day + (7 - delta:4)
             - if 23 is Saturday (5)  Monday (0) day + (7 - delta:5)
+            - if 23 is Sunday (6)    Monday (0) day + (7 - delta:6)
         """
         day_str, nearest_day = self.nearest_day
         day_str_idx = DAY_TO_INDEX[day_str]
