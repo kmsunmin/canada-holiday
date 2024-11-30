@@ -3,3 +3,4 @@ tags*
 __pycache__/
 tests/.pytest_cache/
 .coverage
+dist/
