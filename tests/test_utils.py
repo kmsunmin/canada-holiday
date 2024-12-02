@@ -1,7 +1,7 @@
 import datetime
 
 from canada_holiday.holidays import convert_holiday_info_to_obj
-from canada_holiday.holiday_class import (
+from canada_holiday.holiday import (
     CanadaHoliday,
     parse_preceding_day_str,
 )
@@ -15,8 +15,8 @@ from canada_holiday.utils import (
     get_last_day_str_of_month,
 )
 from tests.fixtures.on import (
-    ONTARIO_2023,
-    ONTARIO_2023_APRIL,
+    ONTARIO_2030,
+    ONTARIO_2030_APRIL,
 )
 from tests.utils import compare_holidays, compare_holidays_list
 
@@ -76,7 +76,6 @@ class TestUtils:
                 month=2,
                 year=2023,
                 day=20,
-                date=datetime.date(2023, 2, 20),
                 nth_day=("mon", 3),
                 province="Ontario",
             ),
@@ -85,7 +84,6 @@ class TestUtils:
                 month=5,
                 year=2023,
                 day=22,
-                date=datetime.date(2023, 5, 22),
                 preceding_date=("mon", 25),
                 province="Ontario",
             ),
@@ -94,7 +92,6 @@ class TestUtils:
                 month=9,
                 year=2023,
                 day=4,
-                date=datetime.date(2023, 9, 4),
                 nth_day=("mon", 1),
                 province="all",
             ),
@@ -105,7 +102,6 @@ class TestUtils:
                 month=9,
                 year=2023,
                 day=4,
-                date=datetime.date(2023, 9, 4),
                 nth_day=("mon", 1),
                 province="all",
             ),
@@ -114,7 +110,6 @@ class TestUtils:
                 month=2,
                 year=2023,
                 day=20,
-                date=datetime.date(2023, 2, 20),
                 nth_day=("mon", 3),
                 province="Ontario",
             ),
@@ -123,7 +118,6 @@ class TestUtils:
                 month=5,
                 year=2023,
                 day=22,
-                date=datetime.date(2023, 5, 22),
                 preceding_date=("mon", 25),
                 province="Ontario",
             ),
@@ -138,8 +132,8 @@ class TestUtils:
 
     def test_filter_list_holidays_by_month(self):
         month = 4
-        all_ontario_holidays = ONTARIO_2023
-        expected_holidays_list_in_month = ONTARIO_2023_APRIL
+        all_ontario_holidays = ONTARIO_2030
+        expected_holidays_list_in_month = ONTARIO_2030_APRIL
 
         actual_holidays_in_month = filter_list_of_holidays_by_month(
             all_ontario_holidays, month
@@ -171,7 +165,6 @@ class TestUtils:
             month=1,
             year=2023,
             day=1,
-            date=datetime.date(2023, 1, 1),
             province="all",
         )
         actual_holiday_info = {
@@ -179,7 +172,6 @@ class TestUtils:
             "month": 1,
             "year": 2023,
             "day": 1,
-            "date": datetime.date(2023, 1, 1),
             "province": "all",
         }
         actual_holiday_obj = convert_holiday_info_to_obj(actual_holiday_info)

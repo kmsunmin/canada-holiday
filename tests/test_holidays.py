@@ -3,8 +3,8 @@ import datetime
 from canada_holiday.holiday_info.on import ONTARIO
 from canada_holiday.holidays import get_holidays, get_province_holidays, is_holiday
 from tests.fixtures.on import (
-    ONTARIO_2023,
-    ONTARIO_2023_APRIL,
+    ONTARIO_2030,
+    ONTARIO_2030_APRIL,
 )
 from tests.utils import compare_holidays_list
 
@@ -16,8 +16,8 @@ class TestCanadaHolidays:
         assert expected_holidays == actual_holidays
 
     def test_get_all_holidays_in_given_year_ontario(self):
-        year = 2023
-        expected_holidays = ONTARIO_2023
+        year = 2030
+        expected_holidays = ONTARIO_2030
 
         actual_holidays = get_holidays("Ontario", year)
         diff = compare_holidays_list(expected_holidays, actual_holidays)
@@ -25,9 +25,9 @@ class TestCanadaHolidays:
         assert diff == []
 
     def test_get_all_holidays_in_given_year_and_month_ontario(self):
-        year = 2023
+        year = 2030
         month = 4
-        expected_holidays = ONTARIO_2023_APRIL
+        expected_holidays = ONTARIO_2030_APRIL
         actual_holidays = get_holidays("Ontario", year, month)
         diff = compare_holidays_list(expected_holidays, actual_holidays)
 
