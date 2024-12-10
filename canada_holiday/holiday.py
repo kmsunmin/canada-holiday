@@ -1,5 +1,7 @@
 from calendar import Calendar
 import datetime
+from enum import Enum
+from typing import Union
 
 from canada_holiday.utils import (
     DAY_TO_INDEX,
@@ -12,55 +14,59 @@ from canada_holiday.utils import (
 cal = Calendar()
 
 
+class HolidayType(Enum):
+    NEAREST_DAY = "nearest"
+    NTH_DAY = "nth"
+    PRECEDING_DATE = "preceding"
+    SUCCEEDING_DATE = "succeeding"
+    BY_DATE = "by_date"
+
+
 class CanadaHoliday:
     def __init__(
         self,
         name: str,
         month: int,
-        year: int = None,
+        year: int,
         day: int = None,
-        day_of_the_week: str = None,
         date: datetime.date = None,
-        nearest_day: (str, int) = None,
-        nth_day: (str, int) = None,
-        preceding_date: (str, int) = None,
-        province: str = None,
-        succeeding_date: (str, int) = None,
+        holiday_type: HolidayType = HolidayType.BY_DATE,
+        day_of_the_week: str = None,
+        nearest_day: Union[str, int] = None,
+        nth_day: Union[str, int] = None,
+        preceding_date: Union[str, int] = None,
+        province: str = "all",
+        succeeding_date: Union[str, int] = None,
     ):
         self.name = name
         self.month = month
         self.year = year
         self.day = day
-        self._day_of_the_week = day_of_the_week
-        self._date = date  # ex: datetime.date(2023, 12, 25)
+        self.day_of_the_week = day_of_the_week
+        self.date = date  # ex: datetime.date(2023, 12, 25)
         self.nearest_day = nearest_day
         self.nth_day = nth_day
         self.preceding_date = preceding_date
         self.province = province
         self.succeeding_date = succeeding_date
+        self.holiday_type = holiday_type
 
-        self.validate_holiday_condition()
+        self.validate()
 
     def __repr__(self):
         return f"CanadaHoliday({self.name}, {self.date}, {self.day_of_the_week}, {self.province})"
 
-    @property
-    def date(self):
-        return self._date
+    def assign_holiday_type(self) -> None:
+        if self.nth_day:
+            self.holiday_type = HolidayType.NTH_DAY
+        elif self.nearest_day:
+            self.holiday_type = HolidayType.NEAREST_DAY
+        elif self.preceding_date:
+            self.holiday_type = HolidayType.PRECEDING_DATE
+        elif self.succeeding_date:
+            self.holiday_type = HolidayType.SUCCEEDING_DATE
 
-    @date.setter
-    def date(self, date: datetime.date):
-        self._date = date
-
-    @property
-    def day_of_the_week(self):
-        return self._day_of_the_week
-
-    @day_of_the_week.setter
-    def day_of_the_week(self, day_of_the_week: str):
-        self._day_of_the_week = day_of_the_week
-
-    def validate_holiday_condition(self) -> None:
+    def validate(self) -> None:
         invalid = False
         if self.nth_day:
             invalid = any([self.preceding_date, self.succeeding_date, self.nearest_day])
@@ -72,9 +78,9 @@ class CanadaHoliday:
             invalid = any([self.nth_day, self.preceding_date, self.nearest_day])
 
         if invalid:
-            raise Exception(
-                f"Cannot validate the Holiday. Please check the Holiday: {self.name}."
-            )
+            raise Exception("Invalid values for the Holiday.")
+        self.assign_holiday_type()
+        self.date = self.to_date(self.year)
 
     def get_nth_day_holiday(self, year: int) -> datetime.date:
         """
@@ -160,6 +166,8 @@ class CanadaHoliday:
         """
         Calculate the datetime.date of the given holiday.
         """
+        if not year:
+            raise Exception("The 'year' parameter is missing.")
         if self.month and self.day:
             return datetime.date(year, self.month, self.day)
 
@@ -172,5 +180,9 @@ class CanadaHoliday:
             date = self.get_succeeding_day_holiday(year)
         elif self.nearest_day:
             date = self.get_nearest_day_holiday(year)
+
+        # Check if any of self.month, self.day is missing
+        self.month = date.month
+        self.day = date.day
 
         return date

@@ -1,8 +1,6 @@
-import datetime
-import json
 from typing import List
 
-from canada_holiday.holiday_class import CanadaHoliday
+from canada_holiday.holiday import CanadaHoliday
 
 
 def compare_holidays(h1: CanadaHoliday, h2: CanadaHoliday):
@@ -20,6 +18,7 @@ def compare_holidays(h1: CanadaHoliday, h2: CanadaHoliday):
         and h1.preceding_date == h2.preceding_date
         and h1.province == h2.province
         and h1.succeeding_date == h2.succeeding_date
+        and h1.holiday_type == h2.holiday_type
     )
 
 
@@ -34,13 +33,25 @@ def compare_holidays_list(h1: List[CanadaHoliday], h2: List[CanadaHoliday]):
             h.month,
             h.year,
             h.day,
-            h.date,
             h.nth_day,
             h.preceding_date,
             h.province,
             h.succeeding_date,
         )
         for h in h1
+    )
+    h2_set = set(
+        (
+            h.name,
+            h.month,
+            h.year,
+            h.day,
+            h.nth_day,
+            h.preceding_date,
+            h.province,
+            h.succeeding_date,
+        )
+        for h in h2
     )
     diff = [
         h
@@ -50,7 +61,6 @@ def compare_holidays_list(h1: List[CanadaHoliday], h2: List[CanadaHoliday]):
             h.month,
             h.year,
             h.day,
-            h.date,
             h.nth_day,
             h.preceding_date,
             h.province,
