@@ -42,7 +42,7 @@ class CanadaHoliday:
         self.month = month
         self.year = year
         self.day = day
-        self._day_of_the_week = day_of_the_week
+        self.day_of_the_week = day_of_the_week
         self.date = date  # ex: datetime.date(2023, 12, 25)
         self.nearest_day = nearest_day
         self.nth_day = nth_day
@@ -55,14 +55,6 @@ class CanadaHoliday:
 
     def __repr__(self):
         return f"CanadaHoliday({self.name}, {self.date}, {self.day_of_the_week}, {self.province})"
-
-    @property
-    def day_of_the_week(self):
-        return self._day_of_the_week
-
-    @day_of_the_week.setter
-    def day_of_the_week(self, day_of_the_week: str):
-        self._day_of_the_week = day_of_the_week
 
     def assign_holiday_type(self) -> None:
         if self.nth_day:
